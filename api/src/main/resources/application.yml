@@ -1,0 +1,7 @@
+
+spring:
+  application:
+    name: Loveletter
+
+server:
+  port: 9143
