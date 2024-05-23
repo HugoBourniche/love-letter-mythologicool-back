@@ -1,30 +1,31 @@
-package fr.bugo.games.loveletter.gamecore.model.player;
+package fr.bugo.games.loveletter.gamecore.model.card.loveletter;
 
+import fr.bugo.games.loveletter.gamecore.model.card.ACard;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public abstract class APlayer {
+public abstract class ALoveLetterCard extends ACard {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
     protected String name;
+    protected Integer value;
+    protected String description;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public APlayer() {
-    }
-
-    public APlayer(String name) {
+    public ALoveLetterCard(String spriteId, boolean isHidden, String name, Integer value, String description) {
+        super(spriteId, isHidden);
         this.name = name;
+        this.value = value;
+        this.description = description;
     }
-
-    // *****************************************************************************************************************
-    // ABSTRACT METHODS
-    // *****************************************************************************************************************
 
     // *****************************************************************************************************************
     // OVERRIDE METHODS
@@ -32,8 +33,11 @@ public abstract class APlayer {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("APlayer{");
-        sb.append("name='").append(name).append('\'');
+        final StringBuffer sb = new StringBuffer("ALoveLetterCard{");
+        sb.append(super.toString());
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", value=").append(value);
+        sb.append(", description='").append(description).append('\'');
         sb.append('}');
         return sb.toString();
     }

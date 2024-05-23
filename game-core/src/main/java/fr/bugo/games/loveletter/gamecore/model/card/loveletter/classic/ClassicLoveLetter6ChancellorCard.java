@@ -1,25 +1,21 @@
-package fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions;
+package fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic;
 
-import fr.bugo.games.loveletter.gamecore.model.player.APlayer;
-import lombok.Data;
-
-import java.util.ArrayList;
-import java.util.List;
-
-@Data
-public abstract class AGameOptions<P extends APlayer> {
-
-    // *****************************************************************************************************************
-    // ATTRIBUTES
-    // *****************************************************************************************************************
-
-    protected List<P> players;
+public class ClassicLoveLetter6ChancellorCard extends AClassicLoveLetterCard {
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public AGameOptions() {
-        this.players = new ArrayList<>();
+    public ClassicLoveLetter6ChancellorCard(String spriteId, String name, Integer value, String description) {
+        super(spriteId, true, name, value, description);
+    }
+
+    // *****************************************************************************************************************
+    // OVERRIDE
+    // *****************************************************************************************************************
+
+    @Override
+    public void Play() {
+        System.out.println("Play " + name);
     }
 }

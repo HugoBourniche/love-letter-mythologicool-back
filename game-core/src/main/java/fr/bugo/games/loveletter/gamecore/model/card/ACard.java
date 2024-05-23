@@ -1,26 +1,27 @@
 package fr.bugo.games.loveletter.gamecore.model.card;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 public abstract class ACard {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    private String spriteId;
-    private boolean isHidden;
+    protected String spriteId;
+    protected boolean facingDown;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    ACard(String spriteId, boolean isHidden) {
+    public ACard() {
+    }
+
+    public ACard(String spriteId, boolean facingDown) {
         this.spriteId = spriteId;
-        this.isHidden = isHidden;
+        this.facingDown = facingDown;
     }
 
     // *****************************************************************************************************************
@@ -28,4 +29,17 @@ public abstract class ACard {
     // *****************************************************************************************************************
 
     public abstract void Play();
+
+    // *****************************************************************************************************************
+    // OVERRIDE METHODS
+    // *****************************************************************************************************************
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ACard{");
+        sb.append("spriteId='").append(spriteId).append('\'');
+        sb.append(", facingDown=").append(facingDown);
+        sb.append('}');
+        return sb.toString();
+    }
 }
