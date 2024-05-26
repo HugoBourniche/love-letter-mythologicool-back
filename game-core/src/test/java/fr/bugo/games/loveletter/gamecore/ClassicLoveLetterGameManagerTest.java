@@ -4,7 +4,7 @@ import fr.bugo.games.loveletter.gamecore.model.gamemanager.ClassicLoveLetterGame
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -13,22 +13,22 @@ import java.util.List;
 
 public class ClassicLoveLetterGameManagerTest {
 
-    private static final List<ClassicLoveLetterPlayer> PLAYERS = new ArrayList<>();
+    private List<ClassicLoveLetterPlayer> players = new ArrayList<>();
 
-    @BeforeAll
-    public static void beforeAll() {
-        PLAYERS.add(new ClassicLoveLetterPlayer("Théo", 1));
-        PLAYERS.add(new ClassicLoveLetterPlayer("Mélanie", 2));
-        PLAYERS.add(new ClassicLoveLetterPlayer("Thomas", 3));
-        PLAYERS.add(new ClassicLoveLetterPlayer("Lilian", 4));
-        PLAYERS.add(new ClassicLoveLetterPlayer("Rémy", 5));
-        PLAYERS.add(new ClassicLoveLetterPlayer("Quentin", 6));
-        PLAYERS.add(new ClassicLoveLetterPlayer("Lysiane", 7));
-        PLAYERS.add(new ClassicLoveLetterPlayer("Clément", 8));
-        PLAYERS.add(new ClassicLoveLetterPlayer("Christophe", 9));
-        PLAYERS.add(new ClassicLoveLetterPlayer("Maxence", 10));
-        PLAYERS.add(new ClassicLoveLetterPlayer("Matthieu", 11));
-        PLAYERS.add(new ClassicLoveLetterPlayer("Hugo", 12));
+    @BeforeEach
+    public void beforeEach() {
+        players.add(new ClassicLoveLetterPlayer("Théo", 1));
+        players.add(new ClassicLoveLetterPlayer("Mélanie", 2));
+        players.add(new ClassicLoveLetterPlayer("Thomas", 3));
+        players.add(new ClassicLoveLetterPlayer("Lilian", 4));
+        players.add(new ClassicLoveLetterPlayer("Rémy", 5));
+        players.add(new ClassicLoveLetterPlayer("Quentin", 6));
+        players.add(new ClassicLoveLetterPlayer("Lysiane", 7));
+        players.add(new ClassicLoveLetterPlayer("Clément", 8));
+        players.add(new ClassicLoveLetterPlayer("Christophe", 9));
+        players.add(new ClassicLoveLetterPlayer("Maxence", 10));
+        players.add(new ClassicLoveLetterPlayer("Matthieu", 11));
+        players.add(new ClassicLoveLetterPlayer("Hugo", 12));
     }
 
     @ParameterizedTest
@@ -39,12 +39,15 @@ public class ClassicLoveLetterGameManagerTest {
         ClassicLoveLetterGameManager gm = new ClassicLoveLetterGameManager();
         gm.initGame(options);
         System.out.println(gm);
-        Assertions.assertEquals(expectedCardsInPile, gm.getCardPile().size());
+        Assertions.assertEquals(expectedCardsInPile, gm.getCardPile().size(), "The stack does not have the right number of cards");
+        for (ClassicLoveLetterPlayer player : gm.getPlayers()) {
+            Assertions.assertEquals(1, player.getHand().size(), player.getName() + " must have only 1 card in their hands");
+        }
     }
 
     private void addPlayers(ClassicLoveLetterGameOptions options, int nbPlayers) {
         for (int i = 0; i < nbPlayers; i++) {
-            options.getPlayers().add(PLAYERS.get(i));
+            options.getPlayers().add(players.get(i));
         }
     }
 }

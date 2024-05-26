@@ -2,6 +2,8 @@ package fr.bugo.games.loveletter.gamecore.model.card;
 
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public abstract class ACard {
 
@@ -10,6 +12,7 @@ public abstract class ACard {
     // *****************************************************************************************************************
 
     protected String spriteId;
+    protected UUID id;
     protected boolean facingDown;
 
     // *****************************************************************************************************************
@@ -19,8 +22,9 @@ public abstract class ACard {
     public ACard() {
     }
 
-    public ACard(String spriteId, boolean facingDown) {
+    public ACard(String spriteId, UUID id, boolean facingDown) {
         this.spriteId = spriteId;
+        this.id = id;
         this.facingDown = facingDown;
     }
 
@@ -38,6 +42,7 @@ public abstract class ACard {
     public String toString() {
         final StringBuffer sb = new StringBuffer("ACard{");
         sb.append("spriteId='").append(spriteId).append('\'');
+        sb.append("id='").append(id).append('\'');
         sb.append(", facingDown=").append(facingDown);
         sb.append('}');
         return sb.toString();

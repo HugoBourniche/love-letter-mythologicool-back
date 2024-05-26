@@ -44,6 +44,7 @@ public class ClassicLoveLetterGameManager extends ALoveLetterGameManager<AClassi
                 player.dealCard(cardPile.drawCard());
                 this.players.add(player);
             }
+            playerTurn = 0;
         } catch (EmptyCardStackException e) {
             LOGGER.error("Impossible to start the game, an error has occurred during the card dealing, it is empty");
         }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public abstract class AGameManager<C extends ACard, P extends APlayer, O extends AGameOptions<P>> {
+public abstract class AGameManager<P extends APlayer, O extends AGameOptions<P>> {
 
     // *****************************************************************************************************************
     // ATTRIBUTES

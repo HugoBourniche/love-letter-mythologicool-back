@@ -12,7 +12,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extends ALoveLetterPlayer<C>, O extends ALoveLetterGameOptions<C, P>> extends AGameManager<C, P, O> {
+public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extends ALoveLetterPlayer<C>, O extends ALoveLetterGameOptions<C, P>> extends AGameManager<P, O> {
 
     // *****************************************************************************************************************
     // ATTRIBUTES

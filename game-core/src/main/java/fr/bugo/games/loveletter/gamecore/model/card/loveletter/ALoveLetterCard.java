@@ -4,6 +4,8 @@ import fr.bugo.games.loveletter.gamecore.model.card.ACard;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.UUID;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 public abstract class ALoveLetterCard extends ACard {
@@ -21,7 +23,7 @@ public abstract class ALoveLetterCard extends ACard {
     // *****************************************************************************************************************
 
     public ALoveLetterCard(String spriteId, boolean isHidden, String name, Integer value, String description) {
-        super(spriteId, isHidden);
+        super(spriteId, UUID.randomUUID(), isHidden);
         this.name = name;
         this.value = value;
         this.description = description;

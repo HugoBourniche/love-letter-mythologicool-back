@@ -41,6 +41,21 @@ public class ClassicLoveLetterCardFactory {
         return stack;
     }
 
+    public static AClassicLoveLetterCard buildCard(String name) {
+        switch (name) {
+            case "Espionne": return buildSpy();
+            case "Garde": return buildGuard();
+            case "Prêtre": return buildPriest();
+            case "Baron": return buildBaron();
+            case "Servante": return buildHandmaid();
+            case "Prince": return buildPrince();
+            case "Chancelier": return buildChancellor();
+            case "Roi": return buildKing();
+            case "Comtesse": return buildCountess();
+            default: return buildPrincess();
+        }
+    }
+
     private static ClassicLoveLetter0SpyCard buildSpy() {
         return new ClassicLoveLetter0SpyCard("loveletter_classic_0_spy", "Espionne", 0, "");
     }

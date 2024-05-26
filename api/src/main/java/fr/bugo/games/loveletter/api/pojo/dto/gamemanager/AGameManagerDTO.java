@@ -1,25 +1,25 @@
-package fr.bugo.games.loveletter.dto;
+package fr.bugo.games.loveletter.api.pojo.dto.gamemanager;
 
-import lombok.AllArgsConstructor;
+import fr.bugo.games.loveletter.api.pojo.dto.player.APlayerDTO;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Data
-public class LoveLetterCardDTO extends ACardDTO {
+public abstract class AGameManagerDTO<P extends APlayerDTO> implements Serializable {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    private String name;
-    private Integer value;
+    protected List<P> players;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public LoveLetterCardDTO(String spriteId, String name, Integer value) {
-        super(spriteId);
-        this.name = name;
-        this.value = value;
+    public AGameManagerDTO() {
     }
+
 }

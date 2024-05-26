@@ -6,7 +6,6 @@
 	<modules>
 		<module>api</module>
 		<module>game-core</module>
-		<module>dto</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

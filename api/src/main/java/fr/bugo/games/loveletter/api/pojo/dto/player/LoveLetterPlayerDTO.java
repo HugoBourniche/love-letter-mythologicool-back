@@ -1,24 +1,27 @@
-package fr.bugo.games.loveletter.api.pojo.response;
+package fr.bugo.games.loveletter.api.pojo.dto.player;
 
-import fr.bugo.games.loveletter.api.pojo.dto.ACardDTO;
+import fr.bugo.games.loveletter.api.pojo.dto.LoveLetterCardDTO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class DeckResponse {
+public class LoveLetterPlayerDTO extends APlayerDTO {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    List<ACardDTO> cardStack;
+    protected List<LoveLetterCardDTO> hand = new ArrayList<>();
+    protected Integer position;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public DeckResponse(List<ACardDTO> cardStack) {
-        this.cardStack = cardStack;
+    public LoveLetterPlayerDTO() {
     }
 }

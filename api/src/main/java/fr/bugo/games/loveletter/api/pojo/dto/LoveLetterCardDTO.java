@@ -1,24 +1,20 @@
-package fr.bugo.games.loveletter.api.pojo.response;
+package fr.bugo.games.loveletter.api.pojo.dto;
 
-import fr.bugo.games.loveletter.api.pojo.dto.ACardDTO;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class DeckResponse {
+public class LoveLetterCardDTO extends ACardDTO {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    List<ACardDTO> cardStack;
+    private String name;
+    private Integer value;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
+    public LoveLetterCardDTO() {}
 
-    public DeckResponse(List<ACardDTO> cardStack) {
-        this.cardStack = cardStack;
-    }
 }
