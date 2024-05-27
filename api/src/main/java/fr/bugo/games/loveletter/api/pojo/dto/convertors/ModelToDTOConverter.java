@@ -40,8 +40,9 @@ public class ModelToDTOConverter {
 
     public static LoveLetterCardDTO convert(AClassicLoveLetterCard card) {
         LoveLetterCardDTO cardDTO = new LoveLetterCardDTO();
-        cardDTO.setSpriteId(card.getSpriteId());
         cardDTO.setId(card.getId().toString());
+        cardDTO.setSpriteId(card.getSpriteId());
+        cardDTO.setFacingDown(card.isFacingDown());
         cardDTO.setName(card.getName());
         cardDTO.setValue(card.getValue());
         return cardDTO;

@@ -59,6 +59,7 @@ public class DTOtoModelConverter {
     public static AClassicLoveLetterCard convert(LoveLetterCardDTO cardDTO) {
         AClassicLoveLetterCard card = ClassicLoveLetterCardFactory.buildCard(cardDTO.getName());
         card.setId(UUID.fromString(cardDTO.getId()));
+        card.setFacingDown(cardDTO.isFacingDown());
         return card;
     }
 }

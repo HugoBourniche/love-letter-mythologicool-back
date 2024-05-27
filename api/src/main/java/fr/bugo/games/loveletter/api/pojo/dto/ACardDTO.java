@@ -9,8 +9,9 @@ public abstract class ACardDTO {
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    private String spriteId;
     private String id;
+    private String spriteId;
+    protected boolean facingDown;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR

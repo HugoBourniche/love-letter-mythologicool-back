@@ -11,20 +11,19 @@ public abstract class ACard {
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected String spriteId;
     protected UUID id;
+    protected String spriteId;
     protected boolean facingDown;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public ACard() {
-    }
+    public ACard() {}
 
-    public ACard(String spriteId, UUID id, boolean facingDown) {
-        this.spriteId = spriteId;
+    public ACard(UUID id, String spriteId, boolean facingDown) {
         this.id = id;
+        this.spriteId = spriteId;
         this.facingDown = facingDown;
     }
 

@@ -23,7 +23,7 @@ public abstract class ALoveLetterCard extends ACard {
     // *****************************************************************************************************************
 
     public ALoveLetterCard(String spriteId, boolean isHidden, String name, Integer value, String description) {
-        super(spriteId, UUID.randomUUID(), isHidden);
+        super(UUID.randomUUID(), spriteId, isHidden);
         this.name = name;
         this.value = value;
         this.description = description;
