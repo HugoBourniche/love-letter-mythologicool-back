@@ -1,24 +1,29 @@
-package fr.bugo.games.loveletter.api.pojo.response;
+package fr.bugo.games.loveletter.lobbycore.models;
 
-import fr.bugo.games.loveletter.dto.gamecore.ACardDTO;
+import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
+import fr.bugo.games.loveletter.lobbycore.models.users.User;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class DeckResponse {
+public class Lobby {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    List<ACardDTO> cardStack;
+    private String key;
+    private User owner;
+    private List<LobbyUser> users;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public DeckResponse(List<ACardDTO> cardStack) {
-        this.cardStack = cardStack;
+    public Lobby() {
+        this.users = new ArrayList<>();
     }
+
 }

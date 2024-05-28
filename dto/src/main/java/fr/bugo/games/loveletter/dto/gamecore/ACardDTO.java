@@ -1,20 +1,23 @@
-package fr.bugo.games.loveletter.api.pojo.dto;
+package fr.bugo.games.loveletter.dto.gamecore;
 
 import lombok.Data;
 
 @Data
-public class LoveLetterCardDTO extends ACardDTO {
+public abstract class ACardDTO {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    private String name;
-    private Integer value;
+    private String id;
+    private String spriteId;
+    protected boolean facingDown;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
-    public LoveLetterCardDTO() {}
+
+    public ACardDTO() {
+    }
 
 }

@@ -1,24 +1,22 @@
-package fr.bugo.games.loveletter.api.pojo.response;
+package fr.bugo.games.loveletter.dto.lobbycore;
 
-import fr.bugo.games.loveletter.dto.gamecore.ACardDTO;
 import lombok.Data;
 
-import java.util.List;
+import java.io.Serializable;
 
 @Data
-public class DeckResponse {
+public class UserDTO implements Serializable {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    List<ACardDTO> cardStack;
+    private String name;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public DeckResponse(List<ACardDTO> cardStack) {
-        this.cardStack = cardStack;
-    }
+    public UserDTO() {}
+
 }

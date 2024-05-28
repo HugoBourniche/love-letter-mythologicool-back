@@ -1,6 +1,5 @@
 package fr.bugo.games.loveletter.gamecore.model.gamemanager;
 
-import fr.bugo.games.loveletter.gamecore.model.card.ACard;
 import fr.bugo.games.loveletter.gamecore.model.player.APlayer;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.AGameOptions;
 import fr.bugo.games.loveletter.gamecore.utils.ToStringUtils;

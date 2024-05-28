@@ -1,20 +1,26 @@
-package fr.bugo.games.loveletter.api.pojo.dto.player;
+package fr.bugo.games.loveletter.api.pojo.response;
 
+import fr.bugo.games.loveletter.dto.lobbycore.LobbyDTO;
+import fr.bugo.games.loveletter.dto.lobbycore.UserDTO;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class APlayerDTO {
+public class LobbyCreationResponse implements Serializable {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected String name;
+    private LobbyDTO lobby;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public APlayerDTO() {}
+    public LobbyCreationResponse(LobbyDTO lobby) {
+        this.lobby = lobby;
+    }
 
 }

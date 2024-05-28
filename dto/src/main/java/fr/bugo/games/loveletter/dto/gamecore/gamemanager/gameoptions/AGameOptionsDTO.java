@@ -1,6 +1,6 @@
-package fr.bugo.games.loveletter.api.pojo.dto.gamemanager.gameoptions;
+package fr.bugo.games.loveletter.dto.gamecore.gamemanager.gameoptions;
 
-import fr.bugo.games.loveletter.api.pojo.dto.player.APlayerDTO;
+import fr.bugo.games.loveletter.dto.gamecore.player.APlayerDTO;
 import lombok.Data;
 
 import java.io.Serializable;

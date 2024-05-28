@@ -1,10 +1,10 @@
 package fr.bugo.games.loveletter.api.controller;
 
-import fr.bugo.games.loveletter.api.pojo.dto.convertors.DTOtoModelConverter;
-import fr.bugo.games.loveletter.api.pojo.dto.convertors.ModelToDTOConverter;
-import fr.bugo.games.loveletter.api.pojo.dto.gamemanager.LoveLetterGameManagerDTO;
+import fr.bugo.games.loveletter.dto.gamecore.convertors.GCDTOtoModelConverter;
+import fr.bugo.games.loveletter.dto.gamecore.convertors.GCModelToDTOConverter;
+import fr.bugo.games.loveletter.dto.gamecore.gamemanager.LoveLetterGameManagerDTO;
 import fr.bugo.games.loveletter.api.pojo.response.InitialisationResponse;
-import fr.bugo.games.loveletter.api.pojo.dto.gamemanager.gameoptions.LoveLetterGameOptionsDTO;
+import fr.bugo.games.loveletter.dto.gamecore.gamemanager.gameoptions.LoveLetterGameOptionsDTO;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.ClassicLoveLetterGameManager;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import org.springframework.http.HttpStatus;
@@ -23,15 +23,15 @@ public class ClassicLoveLetterController {
 
     @GetMapping("/info")
     public ResponseEntity<String> info() {
-        return new ResponseEntity<>("Love letter server is on", HttpStatus.OK);
+        return new ResponseEntity<>("Classic Love letter feature server is on", HttpStatus.OK);
     }
 
     @PostMapping("/initialize")
     public ResponseEntity<InitialisationResponse> initialize(@RequestBody LoveLetterGameOptionsDTO gameOptionsDTO) {
-        ClassicLoveLetterGameOptions gameOptions = DTOtoModelConverter.convert(gameOptionsDTO);
+        ClassicLoveLetterGameOptions gameOptions = GCDTOtoModelConverter.convert(gameOptionsDTO);
         ClassicLoveLetterGameManager gameManager = new ClassicLoveLetterGameManager();
         gameManager.initGame(gameOptions);
-        LoveLetterGameManagerDTO gameManagerDTO = ModelToDTOConverter.convert(gameManager);
+        LoveLetterGameManagerDTO gameManagerDTO = GCModelToDTOConverter.convert(gameManager);
         return new ResponseEntity<>(new InitialisationResponse(gameManagerDTO), HttpStatus.OK);
     }
 

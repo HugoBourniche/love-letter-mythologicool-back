@@ -1,19 +1,25 @@
-package fr.bugo.games.loveletter.api.pojo.dto.gamemanager.gameoptions;
+package fr.bugo.games.loveletter.lobbycore.models.users;
 
-import fr.bugo.games.loveletter.api.pojo.dto.player.LoveLetterPlayerDTO;
 import lombok.Data;
 
 @Data
-public class LoveLetterGameOptionsDTO extends AGameOptionsDTO<LoveLetterPlayerDTO> {
+public class LobbyUser extends User {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
+    private boolean isReady = false;
+
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public LoveLetterGameOptionsDTO() {}
 
+    public LobbyUser() {
+    }
+
+    public LobbyUser(String name) {
+        super(name);
+    }
 }

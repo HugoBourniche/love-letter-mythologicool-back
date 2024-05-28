@@ -1,8 +1,8 @@
-package fr.bugo.games.loveletter.api.pojo.dto.convertors;
+package fr.bugo.games.loveletter.dto.gamecore.convertors;
 
-import fr.bugo.games.loveletter.api.pojo.dto.LoveLetterCardDTO;
-import fr.bugo.games.loveletter.api.pojo.dto.gamemanager.LoveLetterGameManagerDTO;
-import fr.bugo.games.loveletter.api.pojo.dto.player.LoveLetterPlayerDTO;
+import fr.bugo.games.loveletter.dto.gamecore.LoveLetterCardDTO;
+import fr.bugo.games.loveletter.dto.gamecore.gamemanager.LoveLetterGameManagerDTO;
+import fr.bugo.games.loveletter.dto.gamecore.player.LoveLetterPlayerDTO;
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic.AClassicLoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.ClassicLoveLetterGameManager;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
@@ -10,7 +10,7 @@ import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelToDTOConverter {
+public class GCModelToDTOConverter {
 
     // *****************************************************************************************************************
     // CONVERT GAME MANAGER

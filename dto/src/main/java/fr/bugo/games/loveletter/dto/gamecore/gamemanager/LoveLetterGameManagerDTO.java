@@ -1,7 +1,7 @@
-package fr.bugo.games.loveletter.api.pojo.dto.gamemanager;
+package fr.bugo.games.loveletter.dto.gamecore.gamemanager;
 
-import fr.bugo.games.loveletter.api.pojo.dto.LoveLetterCardDTO;
-import fr.bugo.games.loveletter.api.pojo.dto.player.LoveLetterPlayerDTO;
+import fr.bugo.games.loveletter.dto.gamecore.LoveLetterCardDTO;
+import fr.bugo.games.loveletter.dto.gamecore.player.LoveLetterPlayerDTO;
 import lombok.Data;
 
 import java.util.List;

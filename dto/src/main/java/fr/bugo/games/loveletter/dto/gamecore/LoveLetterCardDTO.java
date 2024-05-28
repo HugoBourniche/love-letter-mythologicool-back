@@ -1,24 +1,22 @@
-package fr.bugo.games.loveletter.api.pojo.response;
+package fr.bugo.games.loveletter.dto.gamecore;
 
-import fr.bugo.games.loveletter.dto.gamecore.ACardDTO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.util.List;
-
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class DeckResponse {
+public class LoveLetterCardDTO extends ACardDTO {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    List<ACardDTO> cardStack;
+    private String name;
+    private Integer value;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
+    public LoveLetterCardDTO() {}
 
-    public DeckResponse(List<ACardDTO> cardStack) {
-        this.cardStack = cardStack;
-    }
 }

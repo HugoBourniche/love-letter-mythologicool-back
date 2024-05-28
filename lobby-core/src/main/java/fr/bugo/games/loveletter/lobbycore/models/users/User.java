@@ -1,25 +1,24 @@
-package fr.bugo.games.loveletter.api.pojo.dto.gamemanager;
+package fr.bugo.games.loveletter.lobbycore.models.users;
 
-import fr.bugo.games.loveletter.api.pojo.dto.player.APlayerDTO;
 import lombok.Data;
 
-import java.io.Serializable;
-import java.util.List;
-
 @Data
-public abstract class AGameManagerDTO<P extends APlayerDTO> implements Serializable {
+public class User {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected List<P> players;
+    private String name;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public AGameManagerDTO() {
-    }
 
+    public User() {}
+
+    public User(String name) {
+        this.name = name;
+    }
 }

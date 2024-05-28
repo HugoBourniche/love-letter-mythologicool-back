@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.bugo.games.loveletter</groupId>
-    <artifactId>game-core</artifactId>
+    <artifactId>dto</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -19,10 +19,18 @@
 
     <dependencies>
         <dependency>
+            <artifactId>game-core</artifactId>
+            <groupId>${parent.groupId}.loveletter</groupId>
+            <version>${parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <artifactId>lobby-core</artifactId>
             <groupId>${parent.groupId}.loveletter</groupId>
             <version>${parent.version}</version>
             <scope>compile</scope>
         </dependency>
+
     </dependencies>
 </project>

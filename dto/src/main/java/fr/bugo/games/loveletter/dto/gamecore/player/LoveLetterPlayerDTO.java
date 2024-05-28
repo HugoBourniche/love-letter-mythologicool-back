@@ -1,6 +1,6 @@
-package fr.bugo.games.loveletter.api.pojo.dto.player;
+package fr.bugo.games.loveletter.dto.gamecore.player;
 
-import fr.bugo.games.loveletter.api.pojo.dto.LoveLetterCardDTO;
+import fr.bugo.games.loveletter.dto.gamecore.LoveLetterCardDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
