@@ -4,6 +4,7 @@ import fr.bugo.games.loveletter.gamecore.model.card.loveletter.ALoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ALoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ALoveLetterPlayer;
 import fr.bugo.games.loveletter.gamecore.model.stack.CardStack;
+import fr.bugo.games.loveletter.shareddata.models.AGameManager;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

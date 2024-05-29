@@ -1,24 +1,24 @@
-package fr.bugo.games.loveletter.lobbycore.models.users;
+package fr.bugo.games.loveletter.shareddata.models;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
-public class User {
+public abstract class AGameOptions<P extends APlayer> {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    private String name;
+    protected List<P> players;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-
-    public User() {}
-
-    public User(String name) {
-        this.name = name;
+    public AGameOptions() {
+        this.players = new ArrayList<>();
     }
 }

@@ -8,6 +8,7 @@
 		<module>game-core</module>
         <module>lobby-core</module>
 		<module>dto</module>
+		<module>shared-data</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

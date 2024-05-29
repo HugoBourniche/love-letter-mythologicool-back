@@ -3,7 +3,7 @@ package fr.bugo.games.loveletter.dto.lobbycore.convertors;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyUserDTO;
 import fr.bugo.games.loveletter.dto.lobbycore.UserDTO;
 import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
-import fr.bugo.games.loveletter.lobbycore.models.users.User;
+import fr.bugo.games.loveletter.shareddata.models.User;
 
 public class LCDTOtoModelConverter {
 

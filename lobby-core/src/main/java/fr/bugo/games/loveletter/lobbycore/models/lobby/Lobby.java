@@ -1,25 +1,15 @@
-package fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions;
+package fr.bugo.games.loveletter.lobbycore.models.lobby;
 
-import fr.bugo.games.loveletter.gamecore.model.player.APlayer;
-import lombok.Data;
+import fr.bugo.games.loveletter.shareddata.models.APlayer;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Data
-public abstract class AGameOptions<P extends APlayer> {
+public class Lobby extends ALobby<APlayer> {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected List<P> players;
-
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public AGameOptions() {
-        this.players = new ArrayList<>();
-    }
 }

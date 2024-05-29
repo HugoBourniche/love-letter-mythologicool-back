@@ -1,7 +1,9 @@
 package fr.bugo.games.loveletter.api.services;
 
-import fr.bugo.games.loveletter.lobbycore.models.Lobby;
-import fr.bugo.games.loveletter.lobbycore.models.users.User;
+import fr.bugo.games.loveletter.gamecore.factory.GameOptionFactory;
+import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
+import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
+import fr.bugo.games.loveletter.shareddata.models.User;
 import fr.bugo.games.loveletter.lobbycore.utils.LobbyKeyCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +26,11 @@ public class LobbyService {
     // PUBLIC METHODS
     // *****************************************************************************************************************
 
-    public Lobby createLobby(User owner) {
+    public Lobby createLobby(User owner, GameToPlay game) {
         Lobby lobby = new Lobby();
         lobby.setKey(LobbyKeyCreator.generateKey(lobbiesMap.keySet()));
         lobby.setOwner(owner);
+        lobby.setGameOptions(GameOptionFactory.createGameOptions(game));
         this.lobbiesMap.put(lobby.getKey(), lobby);
         LOGGER.info("Lobby [" + lobby.getKey() + "] created by " + owner.getName());
         return lobby;

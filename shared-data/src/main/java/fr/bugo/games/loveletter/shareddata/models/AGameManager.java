@@ -1,54 +1,33 @@
-package fr.bugo.games.loveletter.gamecore.model.stack;
+package fr.bugo.games.loveletter.shareddata.models;
 
-import fr.bugo.games.loveletter.gamecore.exceptions.EmptyCardStackException;
-import fr.bugo.games.loveletter.gamecore.model.card.ACard;
 import fr.bugo.games.loveletter.shareddata.utils.ToStringUtils;
 import lombok.Data;
 
-import java.util.Collections;
-import java.util.EmptyStackException;
-import java.util.Stack;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
-public class CardStack<C extends ACard> {
+public abstract class AGameManager<P extends APlayer, O extends AGameOptions<P>> {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected Stack<C> stack;
+    protected List<P> players;
 
     // *****************************************************************************************************************
-    // METHODS
+    // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public CardStack() {
-        this.stack = new Stack<>();
+    public AGameManager() {
+        this.players = new ArrayList<>();
     }
 
     // *****************************************************************************************************************
-    // METHODS
+    // ABSTRACT METHODS
     // *****************************************************************************************************************
 
-    public void addCard(C card) {
-        stack.add(card);
-    }
-
-    public int size() {
-        return stack.size();
-    }
-
-    public void shuffle() {
-        Collections.shuffle(stack);
-    }
-
-    public C drawCard() throws EmptyCardStackException {
-        try {
-            return stack.pop();
-        } catch (EmptyStackException e) {
-            throw new EmptyCardStackException("Impossible to draw from an empty stack of cards");
-        }
-    }
+    public abstract void initGame(O options);
 
     // *****************************************************************************************************************
     // OVERRIDE METHODS
@@ -56,8 +35,8 @@ public class CardStack<C extends ACard> {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("CardStack{");
-        sb.append(ToStringUtils.list(stack, "stack"));
+        final StringBuffer sb = new StringBuffer("AGameManager{");
+        sb.append(ToStringUtils.list(players, "players"));
         sb.append('}');
         return sb.toString();
     }

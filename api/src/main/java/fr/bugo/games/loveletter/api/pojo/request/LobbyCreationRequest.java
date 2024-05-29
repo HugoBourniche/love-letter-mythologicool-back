@@ -13,4 +13,6 @@ public class LobbyCreationRequest implements Serializable {
     // *****************************************************************************************************************
 
     private UserDTO owner;
+    private String game;
+
 }

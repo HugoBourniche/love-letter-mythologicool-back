@@ -1,4 +1,4 @@
-package fr.bugo.games.loveletter.gamecore.utils;
+package fr.bugo.games.loveletter.shareddata.utils;
 
 import java.util.List;
 

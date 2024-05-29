@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/loveletter/classic")
-public class ClassicLoveLetterController {
+public class ClassicLoveLetterGameController {
 
     @GetMapping("/info")
     public ResponseEntity<String> info() {

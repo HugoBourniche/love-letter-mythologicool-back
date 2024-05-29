@@ -3,9 +3,9 @@ package fr.bugo.games.loveletter.dto.lobbycore.convertors;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyDTO;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyUserDTO;
 import fr.bugo.games.loveletter.dto.lobbycore.UserDTO;
-import fr.bugo.games.loveletter.lobbycore.models.Lobby;
+import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
 import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
-import fr.bugo.games.loveletter.lobbycore.models.users.User;
+import fr.bugo.games.loveletter.shareddata.models.User;
 
 import java.util.ArrayList;
 import java.util.List;

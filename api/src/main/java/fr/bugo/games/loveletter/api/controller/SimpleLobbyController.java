@@ -6,8 +6,9 @@ import fr.bugo.games.loveletter.api.services.LobbyService;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCDTOtoModelConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCModelToDTOConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyDTO;
-import fr.bugo.games.loveletter.lobbycore.models.Lobby;
-import fr.bugo.games.loveletter.lobbycore.models.users.User;
+import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
+import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
+import fr.bugo.games.loveletter.shareddata.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,8 @@ public class SimpleLobbyController {
     public ResponseEntity<LobbyCreationResponse> create(@RequestBody LobbyCreationRequest request) {
         LOGGER.info("/lobby/create/" + request.getOwner().getName());
         User owner = LCDTOtoModelConverter.convert(request.getOwner());
-        Lobby lobby = lobbyService.createLobby(owner);
+        GameToPlay currentGame = GameToPlay.convert(request.getGame());
+        Lobby lobby = lobbyService.createLobby(owner, currentGame);
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
         return new ResponseEntity<>(new LobbyCreationResponse(lobbyDTO), HttpStatus.OK);
     }

@@ -1,7 +1,9 @@
 package fr.bugo.games.loveletter.gamecore.model.player;
 
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.ALoveLetterCard;
-import fr.bugo.games.loveletter.gamecore.utils.ToStringUtils;
+import fr.bugo.games.loveletter.shareddata.models.User;
+import fr.bugo.games.loveletter.shareddata.utils.ToStringUtils;
+import fr.bugo.games.loveletter.shareddata.models.APlayer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,8 +29,8 @@ public abstract class ALoveLetterPlayer<C extends ALoveLetterCard> extends APlay
         this.hand = new ArrayList<>();
     }
 
-    public ALoveLetterPlayer(String name, Integer position) {
-        super(name);
+    public ALoveLetterPlayer(User user, Integer position) {
+        super(user);
         this.position = position;
         this.hand = new ArrayList<>();
     }

@@ -1,35 +1,29 @@
-package fr.bugo.games.loveletter.gamecore.model.gamemanager;
+package fr.bugo.games.loveletter.shareddata.models;
 
-import fr.bugo.games.loveletter.gamecore.model.player.APlayer;
-import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.AGameOptions;
-import fr.bugo.games.loveletter.gamecore.utils.ToStringUtils;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
-public abstract class AGameManager<P extends APlayer, O extends AGameOptions<P>> {
+public abstract class APlayer {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected List<P> players;
+    protected User user;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public AGameManager() {
-        this.players = new ArrayList<>();
+    public APlayer() {}
+
+    public APlayer(User user) {
+        this.user = user;
     }
 
     // *****************************************************************************************************************
     // ABSTRACT METHODS
     // *****************************************************************************************************************
-
-    public abstract void initGame(O options);
 
     // *****************************************************************************************************************
     // OVERRIDE METHODS
@@ -37,8 +31,8 @@ public abstract class AGameManager<P extends APlayer, O extends AGameOptions<P>>
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("AGameManager{");
-        sb.append(ToStringUtils.list(players, "players"));
+        final StringBuffer sb = new StringBuffer("APlayer{");
+        sb.append("name='").append(user).append('\'');
         sb.append('}');
         return sb.toString();
     }

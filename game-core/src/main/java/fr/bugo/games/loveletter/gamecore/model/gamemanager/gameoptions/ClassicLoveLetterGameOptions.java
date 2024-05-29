@@ -1,6 +1,6 @@
 package fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions;
 
-import fr.bugo.games.loveletter.gamecore.factory.LoveLetterGame;
+import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic.AClassicLoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
 import lombok.Data;
@@ -19,6 +19,6 @@ public class ClassicLoveLetterGameOptions extends ALoveLetterGameOptions<AClassi
     // *****************************************************************************************************************
 
     public ClassicLoveLetterGameOptions() {
-        super(LoveLetterGame.CLASSIC);
+        super(GameToPlay.CLASSIC);
     }
 }

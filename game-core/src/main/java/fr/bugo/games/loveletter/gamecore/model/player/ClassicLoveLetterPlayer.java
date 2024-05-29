@@ -1,6 +1,7 @@
 package fr.bugo.games.loveletter.gamecore.model.player;
 
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic.AClassicLoveLetterCard;
+import fr.bugo.games.loveletter.shareddata.models.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,8 +15,8 @@ public class ClassicLoveLetterPlayer extends ALoveLetterPlayer<AClassicLoveLette
 
     public ClassicLoveLetterPlayer() {}
 
-    public ClassicLoveLetterPlayer(String name, Integer position) {
-        super(name, position);
+    public ClassicLoveLetterPlayer(User user, Integer position) {
+        super(user, position);
     }
 
     // *****************************************************************************************************************

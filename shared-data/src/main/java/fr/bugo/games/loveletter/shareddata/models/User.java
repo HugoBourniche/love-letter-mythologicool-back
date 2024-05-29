@@ -1,30 +1,25 @@
-package fr.bugo.games.loveletter.gamecore.model.player;
+package fr.bugo.games.loveletter.shareddata.models;
 
 import lombok.Data;
 
 @Data
-public abstract class APlayer {
+public class User {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected String name;
+    private String name;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public APlayer() {
-    }
+    public User() {}
 
-    public APlayer(String name) {
+    public User(String name) {
         this.name = name;
     }
-
-    // *****************************************************************************************************************
-    // ABSTRACT METHODS
-    // *****************************************************************************************************************
 
     // *****************************************************************************************************************
     // OVERRIDE METHODS
@@ -32,7 +27,7 @@ public abstract class APlayer {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("APlayer{");
+        final StringBuffer sb = new StringBuffer("User{");
         sb.append("name='").append(name).append('\'');
         sb.append('}');
         return sb.toString();
