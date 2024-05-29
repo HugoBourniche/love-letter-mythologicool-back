@@ -7,6 +7,7 @@ import fr.bugo.games.loveletter.gamecore.factory.card.ClassicLoveLetterCardFacto
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic.AClassicLoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
+import fr.bugo.games.loveletter.shareddata.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,8 @@ public class GCDTOtoModelConverter {
 
     public static ClassicLoveLetterPlayer convert(LoveLetterPlayerDTO playerDTO) {
         ClassicLoveLetterPlayer player = new ClassicLoveLetterPlayer();
-        player.setName(playerDTO.getName());
+        User user = new User(playerDTO.getName());
+        player.setUser(user); // TODO Fix this
         player.setPosition(playerDTO.getPosition());
         player.setHand(convert(playerDTO.getHand()));
         return player;

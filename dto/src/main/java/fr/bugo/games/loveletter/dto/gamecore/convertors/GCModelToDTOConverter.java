@@ -62,7 +62,7 @@ public class GCModelToDTOConverter {
 
     public static LoveLetterPlayerDTO convert(ClassicLoveLetterPlayer player) {
         LoveLetterPlayerDTO playerDTO = new LoveLetterPlayerDTO();
-        playerDTO.setName(player.getName());
+        playerDTO.setName(player.getUser().getName());
         playerDTO.setHand(convert(player.getHand()));
         playerDTO.setPosition(player.getPosition());
         return playerDTO;
