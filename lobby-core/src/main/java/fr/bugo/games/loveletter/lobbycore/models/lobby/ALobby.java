@@ -1,5 +1,6 @@
 package fr.bugo.games.loveletter.lobbycore.models.lobby;
 
+import fr.bugo.games.loveletter.lobbycore.exceptions.UniqueNameException;
 import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
 import fr.bugo.games.loveletter.shareddata.models.AGameOptions;
 import fr.bugo.games.loveletter.shareddata.models.User;
@@ -32,7 +33,12 @@ public abstract class ALobby {
     // METHODS
     // *****************************************************************************************************************
 
-    public void addNewUser(LobbyUser user) {
+    public void addNewUser(LobbyUser user) throws UniqueNameException {
+        for (LobbyUser otherUser : users) {
+            if (user.getName().equals(otherUser.getName())) {
+                throw new UniqueNameException(user.getName());
+            }
+        }
         this.users.add(user);
     }
 }

@@ -8,6 +8,7 @@ import fr.bugo.games.loveletter.api.services.LobbyService;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCDTOtoModelConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCModelToDTOConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyDTO;
+import fr.bugo.games.loveletter.lobbycore.exceptions.UniqueNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
 import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
 import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
@@ -49,7 +50,6 @@ public class SimpleLobbyController {
 
     @GetMapping("/create")
     public ResponseEntity<LobbyCreationResponse> create(@RequestBody LobbyCreationRequest request) {
-        LOGGER.info("/lobby/create/" + request.getOwner().getName());
         User owner = LCDTOtoModelConverter.convert(request.getOwner());
         GameToPlay currentGame = GameToPlay.convert(request.getGame());
         Lobby lobby = lobbyService.createLobby(owner, currentGame);
@@ -59,17 +59,19 @@ public class SimpleLobbyController {
 
     @GetMapping("/join")
     public ResponseEntity<?> join(@RequestBody LobbyJoinRequest request) {
+        LOGGER.info("/lobby/"+ request.getLobbyKey() +"/join/" + request.getUser().getName());
         Lobby lobby;
         try {
             User user = LCDTOtoModelConverter.convert(request.getUser());
             lobby = lobbyService.joinLobby(request.getLobbyKey(), user);
         } catch (NoLobbyException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (UniqueNameException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         }
 
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
         return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO), HttpStatus.OK);
-
     }
 
 }
