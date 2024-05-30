@@ -1,6 +1,7 @@
 package fr.bugo.games.loveletter.api.services;
 
 import fr.bugo.games.loveletter.gamecore.factory.GameOptionFactory;
+import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
 import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
 import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
 import fr.bugo.games.loveletter.shareddata.models.User;
@@ -36,4 +37,10 @@ public class LobbyService {
         return lobby;
     }
 
+    public Lobby getLobby(String key) throws NoLobbyException {
+        if (!lobbiesMap.containsKey(key)) {
+            throw new NoLobbyException(key);
+        }
+        return lobbiesMap.get(key);
+    }
 }

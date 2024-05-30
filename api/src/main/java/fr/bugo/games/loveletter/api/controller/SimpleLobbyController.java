@@ -2,10 +2,13 @@ package fr.bugo.games.loveletter.api.controller;
 
 import fr.bugo.games.loveletter.api.pojo.request.LobbyCreationRequest;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyCreationResponse;
+import fr.bugo.games.loveletter.api.pojo.response.LobbyJoinRequest;
+import fr.bugo.games.loveletter.api.pojo.response.LobbyJoinedResponse;
 import fr.bugo.games.loveletter.api.services.LobbyService;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCDTOtoModelConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCModelToDTOConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyDTO;
+import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
 import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
 import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
 import fr.bugo.games.loveletter.shareddata.models.User;
@@ -52,6 +55,21 @@ public class SimpleLobbyController {
         Lobby lobby = lobbyService.createLobby(owner, currentGame);
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
         return new ResponseEntity<>(new LobbyCreationResponse(lobbyDTO), HttpStatus.OK);
+    }
+
+    @GetMapping("/join")
+    public ResponseEntity<?> join(@RequestBody LobbyJoinRequest request) {
+        Lobby lobby;
+        try {
+            lobby = lobbyService.getLobby(request.getLobbyKey());
+        } catch (NoLobbyException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        User user = LCDTOtoModelConverter.convert(request.getUser());
+        lobby.addNewUser(user);
+        LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
+        return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO), HttpStatus.OK);
+
     }
 
 }

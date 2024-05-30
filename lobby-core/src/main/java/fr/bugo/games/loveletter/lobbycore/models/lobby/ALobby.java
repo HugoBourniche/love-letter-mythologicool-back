@@ -28,4 +28,12 @@ public abstract class ALobby {
         this.users = new ArrayList<>();
     }
 
+    // *****************************************************************************************************************
+    // METHODS
+    // *****************************************************************************************************************
+
+    public void addNewUser(User user) {
+        LobbyUser lobbyUser = (LobbyUser) user;
+        this.users.add(lobbyUser);
+    }
 }
