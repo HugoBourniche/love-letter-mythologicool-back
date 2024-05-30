@@ -22,7 +22,7 @@ public class LobbyUser extends User {
     public LobbyUser() {
     }
 
-    public LobbyUser(String name) {
-        super(name);
+    public LobbyUser(User user) {
+        super(user.getName());
     }
 }

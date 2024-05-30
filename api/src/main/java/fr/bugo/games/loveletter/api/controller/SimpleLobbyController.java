@@ -61,12 +61,12 @@ public class SimpleLobbyController {
     public ResponseEntity<?> join(@RequestBody LobbyJoinRequest request) {
         Lobby lobby;
         try {
-            lobby = lobbyService.getLobby(request.getLobbyKey());
+            User user = LCDTOtoModelConverter.convert(request.getUser());
+            lobby = lobbyService.joinLobby(request.getLobbyKey(), user);
         } catch (NoLobbyException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
-        User user = LCDTOtoModelConverter.convert(request.getUser());
-        lobby.addNewUser(user);
+
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
         return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO), HttpStatus.OK);
 

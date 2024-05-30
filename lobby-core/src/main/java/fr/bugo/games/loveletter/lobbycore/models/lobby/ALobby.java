@@ -32,8 +32,7 @@ public abstract class ALobby {
     // METHODS
     // *****************************************************************************************************************
 
-    public void addNewUser(User user) {
-        LobbyUser lobbyUser = (LobbyUser) user;
-        this.users.add(lobbyUser);
+    public void addNewUser(LobbyUser user) {
+        this.users.add(user);
     }
 }

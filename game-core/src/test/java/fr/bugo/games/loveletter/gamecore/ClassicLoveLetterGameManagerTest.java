@@ -14,8 +14,16 @@ import java.util.List;
 
 public class ClassicLoveLetterGameManagerTest {
 
-    private List<User> users = new ArrayList<User>();
-    private List<ClassicLoveLetterPlayer> players = new ArrayList<>();
+    // *****************************************************************************************************************
+    // ATTRIBUTES
+    // *****************************************************************************************************************
+
+    private final List<User> users = new ArrayList<User>();
+    private final List<ClassicLoveLetterPlayer> players = new ArrayList<>();
+
+    // *****************************************************************************************************************
+    // BEFORE
+    // *****************************************************************************************************************
 
     @BeforeEach
     public void beforeEach() {
@@ -35,11 +43,15 @@ public class ClassicLoveLetterGameManagerTest {
         }
     }
 
+    // *****************************************************************************************************************
+    // TESTS
+    // *****************************************************************************************************************
+
     @ParameterizedTest
     @CsvSource(value = {"2:15", "3:17", "4:16", "5:15", "6:14"}, delimiter = ':')
     public void nbPlayersTest(int nbPlayers, int expectedCardsInPile) {
         ClassicLoveLetterGameOptions options = new ClassicLoveLetterGameOptions();
-        List<ClassicLoveLetterPlayer> players = addPlayers(nbPlayers);
+        List<ClassicLoveLetterPlayer> players = fetchPlayers(nbPlayers);
         ClassicLoveLetterGameManager gm = new ClassicLoveLetterGameManager();
         gm.initGame(options, players);
         System.out.println(gm);
@@ -49,7 +61,11 @@ public class ClassicLoveLetterGameManagerTest {
         }
     }
 
-    private List<ClassicLoveLetterPlayer> addPlayers(int nbPlayers) {
+    // *****************************************************************************************************************
+    // UTILS
+    // *****************************************************************************************************************
+
+    private List<ClassicLoveLetterPlayer> fetchPlayers(int nbPlayers) {
         List<ClassicLoveLetterPlayer> currentPlayers = new ArrayList<>();
         for (int i = 0; i < nbPlayers; i++) {
             currentPlayers.add(players.get(i));
