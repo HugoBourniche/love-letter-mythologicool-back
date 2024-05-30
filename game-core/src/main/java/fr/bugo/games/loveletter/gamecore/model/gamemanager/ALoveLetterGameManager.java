@@ -13,7 +13,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extends ALoveLetterPlayer<C>, O extends ALoveLetterGameOptions<C, P>> extends AGameManager<P, O> {
+public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extends ALoveLetterPlayer<C>, O extends ALoveLetterGameOptions> extends AGameManager<P, O> {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
@@ -41,9 +41,7 @@ public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extend
 
 
     @Override
-    public void initGame(O options) {
-
-    }
+    public abstract void initGame(O options, List<P> players);
 
     @Override
     public String toString() {

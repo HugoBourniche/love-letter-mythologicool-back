@@ -1,8 +1,6 @@
 package fr.bugo.games.loveletter.lobbycore.models.lobby;
 
-import fr.bugo.games.loveletter.shareddata.models.APlayer;
-
-public class Lobby extends ALobby<APlayer> {
+public class Lobby extends ALobby {
 
     // *****************************************************************************************************************
     // ATTRIBUTES

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public abstract class AGameManager<P extends APlayer, O extends AGameOptions<P>> {
+public abstract class AGameManager<P extends APlayer, O extends AGameOptions> {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
@@ -27,7 +27,7 @@ public abstract class AGameManager<P extends APlayer, O extends AGameOptions<P>>
     // ABSTRACT METHODS
     // *****************************************************************************************************************
 
-    public abstract void initGame(O options);
+    public abstract void initGame(O options, List<P> players);
 
     // *****************************************************************************************************************
     // OVERRIDE METHODS

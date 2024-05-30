@@ -2,7 +2,6 @@ package fr.bugo.games.loveletter.lobbycore.models.lobby;
 
 import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
 import fr.bugo.games.loveletter.shareddata.models.AGameOptions;
-import fr.bugo.games.loveletter.shareddata.models.APlayer;
 import fr.bugo.games.loveletter.shareddata.models.User;
 import lombok.Data;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public abstract class ALobby<P extends APlayer> {
+public abstract class ALobby {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
@@ -19,7 +18,7 @@ public abstract class ALobby<P extends APlayer> {
     private String key;
     private User owner;
     private List<LobbyUser> users;
-    private AGameOptions<P> gameOptions;
+    private AGameOptions gameOptions;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR

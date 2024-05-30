@@ -39,9 +39,9 @@ public class ClassicLoveLetterGameManagerTest {
     @CsvSource(value = {"2:15", "3:17", "4:16", "5:15", "6:14"}, delimiter = ':')
     public void nbPlayersTest(int nbPlayers, int expectedCardsInPile) {
         ClassicLoveLetterGameOptions options = new ClassicLoveLetterGameOptions();
-        addPlayers(options, nbPlayers);
+        List<ClassicLoveLetterPlayer> players = addPlayers(nbPlayers);
         ClassicLoveLetterGameManager gm = new ClassicLoveLetterGameManager();
-        gm.initGame(options);
+        gm.initGame(options, players);
         System.out.println(gm);
         Assertions.assertEquals(expectedCardsInPile, gm.getCardPile().size(), "The stack does not have the right number of cards");
         for (ClassicLoveLetterPlayer player : gm.getPlayers()) {
@@ -49,9 +49,11 @@ public class ClassicLoveLetterGameManagerTest {
         }
     }
 
-    private void addPlayers(ClassicLoveLetterGameOptions options, int nbPlayers) {
+    private List<ClassicLoveLetterPlayer> addPlayers(int nbPlayers) {
+        List<ClassicLoveLetterPlayer> currentPlayers = new ArrayList<>();
         for (int i = 0; i < nbPlayers; i++) {
-            options.getPlayers().add(players.get(i));
+            currentPlayers.add(players.get(i));
         }
+        return currentPlayers;
     }
 }

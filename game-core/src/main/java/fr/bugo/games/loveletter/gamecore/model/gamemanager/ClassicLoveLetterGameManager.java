@@ -8,6 +8,8 @@ import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 public class ClassicLoveLetterGameManager extends ALoveLetterGameManager<AClassicLoveLetterCard, ClassicLoveLetterPlayer, ClassicLoveLetterGameOptions> {
 
     // *****************************************************************************************************************
@@ -29,18 +31,18 @@ public class ClassicLoveLetterGameManager extends ALoveLetterGameManager<AClassi
     // *****************************************************************************************************************
 
     @Override
-    public void initGame(ClassicLoveLetterGameOptions options) {
+    public void initGame(ClassicLoveLetterGameOptions options, List<ClassicLoveLetterPlayer> players) {
         cardPile = ClassicLoveLetterCardFactory.buildInitialGameStack();
         cardPile.shuffle();
         try {
             asideCard.add(cardPile.drawCard());
             // Remove 3 more cards facing up when there are two players
-            for (int i = 0; i < 3 && options.getPlayers().size() == 2; i++) {
+            for (int i = 0; i < 3 && players.size() == 2; i++) {
                 AClassicLoveLetterCard card = cardPile.drawCard();
                 card.setFacingDown(false);
                 asideCard.add(card);
             }
-            for (ClassicLoveLetterPlayer player : options.getPlayers()) {
+            for (ClassicLoveLetterPlayer player : players) {
                 player.dealCard(cardPile.drawCard());
                 this.players.add(player);
             }

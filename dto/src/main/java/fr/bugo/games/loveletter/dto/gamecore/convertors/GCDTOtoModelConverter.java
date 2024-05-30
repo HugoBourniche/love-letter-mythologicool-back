@@ -21,7 +21,6 @@ public class GCDTOtoModelConverter {
 
     public static ClassicLoveLetterGameOptions convert(LoveLetterGameOptionsDTO gameOptionsDTO) {
         ClassicLoveLetterGameOptions gameOptions = new ClassicLoveLetterGameOptions();
-        gameOptions.setPlayers(convertPlayers(gameOptionsDTO.getPlayers()));
         return gameOptions;
     }
 
