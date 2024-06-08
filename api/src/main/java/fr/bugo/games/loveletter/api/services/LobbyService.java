@@ -1,6 +1,8 @@
 package fr.bugo.games.loveletter.api.services;
 
 import fr.bugo.games.loveletter.gamecore.factory.GameOptionFactory;
+import fr.bugo.games.loveletter.lobbycore.exceptions.MultipleOwnerException;
+import fr.bugo.games.loveletter.lobbycore.exceptions.NoOwnerException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.UniqueNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
 import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
@@ -35,9 +37,8 @@ public class LobbyService {
     public Lobby createLobby(User owner, GameToPlay game) {
         Lobby lobby = new Lobby();
         lobby.setKey(LobbyKeyCreator.generateKey(lobbiesMap.keySet()));
-        lobby.setOwner(owner);
         try {
-            lobby.addNewUser(new LobbyUser(owner));
+            lobby.addNewUser(new LobbyUser(owner, true));
         } catch (UniqueNameException e) {
             e.printStackTrace(); // Should not be triggered here
         }
@@ -64,7 +65,13 @@ public class LobbyService {
     public List<LobbyItem> getLobbyItemList() {
         List<LobbyItem> lobbyItemList = new ArrayList<>();
         for (Lobby lobby : this.lobbiesMap.values()) {
-            lobbyItemList.add(new LobbyItem(lobby.getKey(), lobby.getOwner()));
+            LobbyItem item;
+            try {
+                item = new LobbyItem(lobby.getKey(), lobby.getOwner());
+                lobbyItemList.add(item);
+            } catch (NoOwnerException | MultipleOwnerException e) {
+                LOGGER.error(e.getMessage());
+            }
         }
         return lobbyItemList;
     }

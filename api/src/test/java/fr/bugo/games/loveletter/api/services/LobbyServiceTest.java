@@ -1,8 +1,11 @@
 package fr.bugo.games.loveletter.api.services;
 
+import fr.bugo.games.loveletter.lobbycore.exceptions.MultipleOwnerException;
+import fr.bugo.games.loveletter.lobbycore.exceptions.NoOwnerException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.UniqueNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
 import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
+import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
 import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
 import fr.bugo.games.loveletter.shareddata.models.User;
 import org.junit.jupiter.api.Assertions;
@@ -48,16 +51,26 @@ public class LobbyServiceTest {
     @Test
     public void lobbyCreationTest() {
         User owner = users.get(0);
+        LobbyUser lobbyOwner = new LobbyUser(owner, true);
         Lobby lobby = lobbyService.createLobby(owner, GameToPlay.CLASSIC);
-        Assertions.assertEquals(lobby.getOwner(), owner);
+        try {
+            Assertions.assertEquals(lobby.getOwner(), lobbyOwner);
+        } catch (NoOwnerException | MultipleOwnerException e) {
+            Assertions.fail(e.getMessage());
+        }
         Assertions.assertEquals(1, lobby.getUsers().size());
     }
 
     @Test
     public void validLobbyJoinTest() {
         User owner = users.get(0);
+        LobbyUser lobbyOwner = new LobbyUser(owner, true);
         Lobby lobby = lobbyService.createLobby(owner, GameToPlay.CLASSIC);
-        Assertions.assertEquals(lobby.getOwner(), owner);
+        try {
+            Assertions.assertEquals(lobby.getOwner(), lobbyOwner);
+        } catch (NoOwnerException | MultipleOwnerException e) {
+            Assertions.fail(e.getMessage());
+        }
         Assertions.assertEquals(1, lobby.getUsers().size());
         try {
             lobbyService.joinLobby(lobby.getKey(), users.get(1));

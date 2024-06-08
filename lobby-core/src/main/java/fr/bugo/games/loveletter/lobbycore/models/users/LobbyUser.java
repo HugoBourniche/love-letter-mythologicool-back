@@ -13,16 +13,20 @@ public class LobbyUser extends User {
     // *****************************************************************************************************************
 
     private boolean isReady = false;
+    private boolean isOwner = false;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
+    public LobbyUser() {}
 
-    public LobbyUser() {
+    public LobbyUser(User user, boolean isOwner) {
+        super(user.getName());
+        this.isOwner = isOwner;
     }
 
     public LobbyUser(User user) {
-        super(user.getName());
+        this(user, false);
     }
 }

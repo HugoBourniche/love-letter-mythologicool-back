@@ -14,7 +14,6 @@ public class LobbyDTO implements Serializable {
     // *****************************************************************************************************************
 
     private String key;
-    private UserDTO owner;
     private List<LobbyUserDTO> users;
     private AGameOptionsDTO options;
 

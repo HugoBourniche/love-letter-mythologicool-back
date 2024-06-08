@@ -23,6 +23,7 @@ public class LCDTOtoModelConverter {
         LobbyUser lobbyUser = new LobbyUser();
         lobbyUser.setName(userDTO.getName());
         lobbyUser.setReady(userDTO.isReady());
+        lobbyUser.setOwner(userDTO.isOwner());
         return lobbyUser;
     }
 

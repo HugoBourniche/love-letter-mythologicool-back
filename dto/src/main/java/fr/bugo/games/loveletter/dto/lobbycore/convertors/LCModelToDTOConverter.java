@@ -25,7 +25,6 @@ public class LCModelToDTOConverter {
         LobbyDTO lobbyDTO = new LobbyDTO();
         lobbyDTO.setKey(lobby.getKey());
         lobbyDTO.setUsers(convert(lobby.getUsers()));
-        lobbyDTO.setOwner(convert(lobby.getOwner()));
         lobbyDTO.setOptions(convert(lobby.getGameOptions()));
         return lobbyDTO;
     }
@@ -76,6 +75,7 @@ public class LCModelToDTOConverter {
         LobbyUserDTO userDTO = new LobbyUserDTO();
         userDTO.setName(user.getName());
         userDTO.setReady(user.isReady());
+        userDTO.setOwner(user.isOwner());
         return userDTO;
     }
 
