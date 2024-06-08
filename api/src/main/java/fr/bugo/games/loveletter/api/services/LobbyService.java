@@ -4,6 +4,7 @@ import fr.bugo.games.loveletter.gamecore.factory.GameOptionFactory;
 import fr.bugo.games.loveletter.lobbycore.exceptions.UniqueNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
 import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
+import fr.bugo.games.loveletter.lobbycore.models.lobby.LobbyItem;
 import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
 import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
 import fr.bugo.games.loveletter.shareddata.models.User;
@@ -12,7 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class LobbyService {
@@ -56,5 +59,13 @@ public class LobbyService {
         LobbyUser lobbyUser = new LobbyUser(user);
         lobby.addNewUser(lobbyUser);
         return lobby;
+    }
+
+    public List<LobbyItem> getLobbyItemList() {
+        List<LobbyItem> lobbyItemList = new ArrayList<>();
+        for (Lobby lobby : this.lobbiesMap.values()) {
+            lobbyItemList.add(new LobbyItem(lobby.getKey(), lobby.getOwner()));
+        }
+        return lobbyItemList;
     }
 }
