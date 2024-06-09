@@ -2,7 +2,7 @@ package fr.bugo.games.loveletter.gamecore.model.stack;
 
 import fr.bugo.games.loveletter.gamecore.exceptions.EmptyCardStackException;
 import fr.bugo.games.loveletter.gamecore.model.card.ACard;
-import fr.bugo.games.loveletter.gamecore.utils.ToStringUtils;
+import fr.bugo.games.loveletter.shareddata.utils.ToStringUtils;
 import lombok.Data;
 
 import java.util.Collections;

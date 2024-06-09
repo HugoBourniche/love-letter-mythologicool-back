@@ -30,7 +30,20 @@
         </dependency>
 
         <dependency>
+            <artifactId>dto</artifactId>
+            <groupId>${project.groupId}.loveletter</groupId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <artifactId>game-core</artifactId>
+            <groupId>${project.groupId}.loveletter</groupId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <artifactId>lobby-core</artifactId>
             <groupId>${project.groupId}.loveletter</groupId>
             <version>${project.version}</version>
             <scope>compile</scope>

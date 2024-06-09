@@ -1,6 +1,6 @@
 package fr.bugo.games.loveletter.api.pojo.response;
 
-import fr.bugo.games.loveletter.api.pojo.dto.ACardDTO;
+import fr.bugo.games.loveletter.dto.gamecore.ACardDTO;
 import lombok.Data;
 
 import java.util.List;

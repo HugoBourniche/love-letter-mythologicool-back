@@ -18,5 +18,17 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <artifactId>lobby-core</artifactId>
+            <groupId>${parent.groupId}.loveletter</groupId>
+            <version>${parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <artifactId>shared-data</artifactId>
+            <groupId>${parent.groupId}.loveletter</groupId>
+            <version>${parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

@@ -1,6 +1,6 @@
 package fr.bugo.games.loveletter.api.pojo.response;
 
-import fr.bugo.games.loveletter.api.pojo.dto.gamemanager.LoveLetterGameManagerDTO;
+import fr.bugo.games.loveletter.dto.gamecore.gamemanager.LoveLetterGameManagerDTO;
 import lombok.Data;
 
 @Data
