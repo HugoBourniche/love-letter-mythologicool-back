@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class LobbyJoinedResponse implements Serializable {
+public class LobbyUpdateResponse implements Serializable {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
@@ -18,9 +18,8 @@ public class LobbyJoinedResponse implements Serializable {
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public LobbyJoinedResponse() {}
-
-    public LobbyJoinedResponse(LobbyDTO lobby) {
+    public LobbyUpdateResponse(LobbyDTO lobby) {
         this.lobby = lobby;
     }
+
 }

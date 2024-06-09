@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -56,10 +57,12 @@ public class SimpleLobbyController {
 
     @PostMapping("/create")
     public ResponseEntity<LobbyCreationResponse> create(@RequestBody LobbyCreationRequest request) {
+        LOGGER.info("/create/" + request.getGame() + "/" + request.getOwner().getName());
         User owner = LCDTOtoModelConverter.convert(request.getOwner());
         GameToPlay currentGame = GameToPlay.convert(request.getGame());
         Lobby lobby = lobbyService.createLobby(owner, currentGame);
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
+        LOGGER.info("Lobby [" + lobbyDTO + "] created by " + owner.getName());
         return new ResponseEntity<>(new LobbyCreationResponse(lobbyDTO), HttpStatus.OK);
     }
 
@@ -76,6 +79,19 @@ public class SimpleLobbyController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         }
 
+        LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
+        return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO), HttpStatus.OK);
+    }
+
+    @GetMapping("/update")
+    public ResponseEntity<?> update(@RequestParam String lobbyKey) {
+        LOGGER.debug("/lobby/update/" + lobbyKey); // This request is call lot of times
+        Lobby lobby;
+        try {
+            lobby = lobbyService.getLobby(lobbyKey);
+        } catch (NoLobbyException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
         return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO), HttpStatus.OK);
     }

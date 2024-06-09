@@ -44,7 +44,6 @@ public class LobbyService {
         }
         lobby.setGameOptions(GameOptionFactory.createGameOptions(game));
         this.lobbiesMap.put(lobby.getKey(), lobby);
-        LOGGER.info("Lobby [" + lobby.getKey() + "] created by " + owner.getName());
         return lobby;
     }
 
