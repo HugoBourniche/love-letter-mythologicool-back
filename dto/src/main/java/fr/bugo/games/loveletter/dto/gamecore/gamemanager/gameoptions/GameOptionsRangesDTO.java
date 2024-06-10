@@ -1,30 +1,25 @@
-package fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions;
+package fr.bugo.games.loveletter.dto.gamecore.gamemanager.gameoptions;
 
-import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
-import fr.bugo.games.loveletter.shareddata.models.gameoptions.AGameOptions;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
-public abstract class ALoveLetterGameOptions extends AGameOptions {
+public class GameOptionsRangesDTO {
+
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected GameToPlay gameType;
+    private List<String> nbPlayersChoices;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public ALoveLetterGameOptions() {
-        super();
-    }
-
-    public ALoveLetterGameOptions(GameToPlay gameType) {
-        this();
-        this.gameType = gameType;
+    public GameOptionsRangesDTO() {
+        this.nbPlayersChoices = new ArrayList<>();
     }
 }

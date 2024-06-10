@@ -1,5 +1,6 @@
 package fr.bugo.games.loveletter.dto.lobbycore.convertors;
 
+import fr.bugo.games.loveletter.dto.gamecore.gamemanager.gameoptions.GameOptionsRangesDTO;
 import fr.bugo.games.loveletter.dto.gamecore.gamemanager.gameoptions.LoveLetterGameOptionsDTO;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyDTO;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyItemDTO;
@@ -9,8 +10,9 @@ import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLo
 import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
 import fr.bugo.games.loveletter.lobbycore.models.lobby.LobbyItem;
 import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
-import fr.bugo.games.loveletter.shareddata.models.AGameOptions;
+import fr.bugo.games.loveletter.shareddata.models.gameoptions.AGameOptions;
 import fr.bugo.games.loveletter.shareddata.models.User;
+import fr.bugo.games.loveletter.shareddata.models.gameoptions.GameOptionsRanges;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,15 +50,29 @@ public class LCModelToDTOConverter {
     // CONVERT OPTIONS
     // *****************************************************************************************************************
 
-    public static LoveLetterGameOptionsDTO convert(AGameOptions gameOptionsDTO) {
-        LoveLetterGameOptionsDTO gameOptions = new LoveLetterGameOptionsDTO();
-        gameOptions.setMaxPlayers(gameOptionsDTO.getMaxPlayers());
-        return gameOptions;
+    public static LoveLetterGameOptionsDTO convert(AGameOptions gameOptions) {
+        LoveLetterGameOptionsDTO gameOptionsDTO = new LoveLetterGameOptionsDTO();
+        gameOptionsDTO.setMaxPlayers(gameOptions.getMaxPlayers());
+        gameOptionsDTO.setRanges(convert(gameOptions.getRanges()));
+        return gameOptionsDTO;
     }
 
-    public static LoveLetterGameOptionsDTO convert(ClassicLoveLetterGameOptions gameOptionsDTO) {
-        LoveLetterGameOptionsDTO gameOptions = convert((AGameOptions) gameOptionsDTO);
-        return gameOptions;
+    public static LoveLetterGameOptionsDTO convert(ClassicLoveLetterGameOptions gameOptions) {
+        LoveLetterGameOptionsDTO gameOptionsDTO = convert((AGameOptions) gameOptions);
+        return gameOptionsDTO;
+    }
+
+    // *****************************************************************************************************************
+    // CONVERT OPTIONS RANGES
+    // *****************************************************************************************************************
+
+
+    public static GameOptionsRangesDTO convert(GameOptionsRanges gameOptions) {
+        GameOptionsRangesDTO gameOptionsDTO = new GameOptionsRangesDTO();
+        for (int i = gameOptions.getMinPlayersChoice(); i <= gameOptions.getMaxPlayersChoice(); i++) {
+            gameOptionsDTO.getNbPlayersChoices().add(Integer.toString(i));
+        }
+        return gameOptionsDTO;
     }
 
     // *****************************************************************************************************************

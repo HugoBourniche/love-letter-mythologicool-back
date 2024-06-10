@@ -1,21 +1,22 @@
-package fr.bugo.games.loveletter.shareddata.models;
+package fr.bugo.games.loveletter.api.pojo.request;
 
-import fr.bugo.games.loveletter.shareddata.utils.Constants;
+import fr.bugo.games.loveletter.dto.gamecore.gamemanager.gameoptions.LoveLetterGameOptionsDTO;
 import lombok.Data;
 
 @Data
-public abstract class AGameOptions {
+public class ApplyGameOptionsRequest {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    int maxPlayers = Constants.MAX_PLAYERS;
+    private String lobbyKey;
+    private LoveLetterGameOptionsDTO gameOptions;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public AGameOptions() {}
+    public ApplyGameOptionsRequest() {}
 
 }

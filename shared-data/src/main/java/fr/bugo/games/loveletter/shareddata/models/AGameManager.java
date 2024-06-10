@@ -1,5 +1,6 @@
 package fr.bugo.games.loveletter.shareddata.models;
 
+import fr.bugo.games.loveletter.shareddata.models.gameoptions.AGameOptions;
 import fr.bugo.games.loveletter.shareddata.utils.ToStringUtils;
 import lombok.Data;
 

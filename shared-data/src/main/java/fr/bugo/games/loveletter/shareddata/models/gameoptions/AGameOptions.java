@@ -1,23 +1,22 @@
-package fr.bugo.games.loveletter.dto.gamecore.gamemanager.gameoptions;
+package fr.bugo.games.loveletter.shareddata.models.gameoptions;
 
+import fr.bugo.games.loveletter.shareddata.utils.Constants;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public abstract class AGameOptionsDTO implements Serializable {
+public abstract class AGameOptions {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    private int maxPlayers;
-    private GameOptionsRangesDTO ranges;
+    protected int maxPlayers = Constants.MAX_PLAYERS;
+    protected GameOptionsRanges ranges;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public AGameOptionsDTO() {}
+    public AGameOptions() {}
 
 }

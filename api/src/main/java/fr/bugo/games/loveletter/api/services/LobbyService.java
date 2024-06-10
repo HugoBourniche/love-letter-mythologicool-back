@@ -11,6 +11,7 @@ import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
 import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
 import fr.bugo.games.loveletter.shareddata.models.User;
 import fr.bugo.games.loveletter.lobbycore.utils.LobbyKeyCreator;
+import fr.bugo.games.loveletter.shareddata.models.gameoptions.AGameOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -73,5 +74,11 @@ public class LobbyService {
             }
         }
         return lobbyItemList;
+    }
+
+    public boolean updateLobbyGameOptions(String lobbyKey, AGameOptions gameOptions) throws NoLobbyException {
+        Lobby lobby = this.getLobby(lobbyKey);
+        lobby.setGameOptions(gameOptions);
+        return true;
     }
 }

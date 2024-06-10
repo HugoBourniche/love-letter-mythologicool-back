@@ -1,30 +1,26 @@
-package fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions;
+package fr.bugo.games.loveletter.shareddata.models.gameoptions;
 
-import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
-import fr.bugo.games.loveletter.shareddata.models.gameoptions.AGameOptions;
+import fr.bugo.games.loveletter.shareddata.utils.Constants;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
-public abstract class ALoveLetterGameOptions extends AGameOptions {
+public class GameOptionsRanges {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected GameToPlay gameType;
+    int minPlayersChoice = Constants.MAX_PLAYERS;
+    int maxPlayersChoice = Constants.MAX_PLAYERS;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public ALoveLetterGameOptions() {
-        super();
-    }
+    public GameOptionsRanges() {}
 
-    public ALoveLetterGameOptions(GameToPlay gameType) {
-        this();
-        this.gameType = gameType;
+    public GameOptionsRanges(int minPlayersChoice, int maxPlayersChoice) {
+        this.minPlayersChoice = minPlayersChoice;
+        this.maxPlayersChoice = maxPlayersChoice;
     }
 }
