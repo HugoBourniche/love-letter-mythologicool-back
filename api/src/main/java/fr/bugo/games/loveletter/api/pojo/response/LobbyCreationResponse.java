@@ -14,13 +14,15 @@ public class LobbyCreationResponse implements Serializable {
     // *****************************************************************************************************************
 
     private LobbyDTO lobby;
+    private String currentUserName;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public LobbyCreationResponse(LobbyDTO lobby) {
+    public LobbyCreationResponse(LobbyDTO lobby, String currentUserName) {
         this.lobby = lobby;
+        this.currentUserName = currentUserName;
     }
 
 }

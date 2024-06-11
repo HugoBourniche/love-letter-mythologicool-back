@@ -6,6 +6,7 @@ import fr.bugo.games.loveletter.api.pojo.response.LobbyItemListResponse;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyCreationResponse;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyJoinRequest;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyJoinedResponse;
+import fr.bugo.games.loveletter.api.pojo.response.LobbyUpdateResponse;
 import fr.bugo.games.loveletter.api.services.LobbyService;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyItemDTO;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCDTOtoModelConverter;
@@ -65,7 +66,7 @@ public class SimpleLobbyController {
         Lobby lobby = lobbyService.createLobby(owner, currentGame);
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
         LOGGER.info("Lobby [" + lobbyDTO + "] created by " + owner.getName());
-        return new ResponseEntity<>(new LobbyCreationResponse(lobbyDTO), HttpStatus.OK);
+        return new ResponseEntity<>(new LobbyCreationResponse(lobbyDTO, owner.getName()), HttpStatus.OK);
     }
 
     @PostMapping("/join")
@@ -82,7 +83,7 @@ public class SimpleLobbyController {
         }
 
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
-        return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO), HttpStatus.OK);
+        return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO, request.getUser().getName()), HttpStatus.OK);
     }
 
     @GetMapping("/update")
@@ -95,7 +96,7 @@ public class SimpleLobbyController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
-        return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO), HttpStatus.OK);
+        return new ResponseEntity<>(new LobbyUpdateResponse(lobbyDTO), HttpStatus.OK);
     }
 
     @GetMapping("/list")
