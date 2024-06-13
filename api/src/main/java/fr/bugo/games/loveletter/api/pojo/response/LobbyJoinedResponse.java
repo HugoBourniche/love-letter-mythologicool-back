@@ -13,6 +13,7 @@ public class LobbyJoinedResponse implements Serializable {
     // *****************************************************************************************************************
 
     LobbyDTO lobby;
+    String currentUserName;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
@@ -20,7 +21,8 @@ public class LobbyJoinedResponse implements Serializable {
 
     public LobbyJoinedResponse() {}
 
-    public LobbyJoinedResponse(LobbyDTO lobby) {
+    public LobbyJoinedResponse(LobbyDTO lobby, String currentUserName) {
         this.lobby = lobby;
+        this.currentUserName = currentUserName;
     }
 }

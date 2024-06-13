@@ -1,28 +1,25 @@
-package fr.bugo.games.loveletter.api.pojo.response;
+package fr.bugo.games.loveletter.dto.gamecore.gamemanager.gameoptions;
 
-import fr.bugo.games.loveletter.dto.lobbycore.LobbyDTO;
-import fr.bugo.games.loveletter.dto.lobbycore.UserDTO;
 import lombok.Data;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
-public class LobbyCreationResponse implements Serializable {
+public class GameOptionsRangesDTO {
+
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    private LobbyDTO lobby;
-    private String currentUserName;
+    private List<String> nbPlayersChoices;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public LobbyCreationResponse(LobbyDTO lobby, String currentUserName) {
-        this.lobby = lobby;
-        this.currentUserName = currentUserName;
+    public GameOptionsRangesDTO() {
+        this.nbPlayersChoices = new ArrayList<>();
     }
-
 }

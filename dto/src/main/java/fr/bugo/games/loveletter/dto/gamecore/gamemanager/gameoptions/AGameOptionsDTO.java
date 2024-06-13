@@ -11,7 +11,8 @@ public abstract class AGameOptionsDTO implements Serializable {
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    int maxPlayers;
+    private int maxPlayers;
+    private GameOptionsRangesDTO ranges;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR

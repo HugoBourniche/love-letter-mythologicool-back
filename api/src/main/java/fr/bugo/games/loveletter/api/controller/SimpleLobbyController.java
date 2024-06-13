@@ -1,15 +1,18 @@
 package fr.bugo.games.loveletter.api.controller;
 
+import fr.bugo.games.loveletter.api.pojo.request.ApplyGameOptionsRequest;
 import fr.bugo.games.loveletter.api.pojo.request.LobbyCreationRequest;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyItemListResponse;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyCreationResponse;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyJoinRequest;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyJoinedResponse;
+import fr.bugo.games.loveletter.api.pojo.response.LobbyUpdateResponse;
 import fr.bugo.games.loveletter.api.services.LobbyService;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyItemDTO;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCDTOtoModelConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCModelToDTOConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyDTO;
+import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import fr.bugo.games.loveletter.lobbycore.exceptions.UniqueNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
 import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
@@ -63,7 +66,7 @@ public class SimpleLobbyController {
         Lobby lobby = lobbyService.createLobby(owner, currentGame);
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
         LOGGER.info("Lobby [" + lobbyDTO + "] created by " + owner.getName());
-        return new ResponseEntity<>(new LobbyCreationResponse(lobbyDTO), HttpStatus.OK);
+        return new ResponseEntity<>(new LobbyCreationResponse(lobbyDTO, owner.getName()), HttpStatus.OK);
     }
 
     @PostMapping("/join")
@@ -80,7 +83,7 @@ public class SimpleLobbyController {
         }
 
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
-        return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO), HttpStatus.OK);
+        return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO, request.getUser().getName()), HttpStatus.OK);
     }
 
     @GetMapping("/update")
@@ -93,7 +96,7 @@ public class SimpleLobbyController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
-        return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO), HttpStatus.OK);
+        return new ResponseEntity<>(new LobbyUpdateResponse(lobbyDTO), HttpStatus.OK);
     }
 
     @GetMapping("/list")
@@ -104,4 +107,14 @@ public class SimpleLobbyController {
         return new ResponseEntity<>(new LobbyItemListResponse(lobbyItemDTO), HttpStatus.OK);
     }
 
+    @PostMapping("/apply-game-options")
+    public ResponseEntity<?> applyGameOptions(@RequestBody ApplyGameOptionsRequest optionsRequest) {
+        ClassicLoveLetterGameOptions gameOptions = LCDTOtoModelConverter.convert(optionsRequest.getGameOptions());
+        try {
+            lobbyService.updateLobbyGameOptions(optionsRequest.getLobbyKey(), gameOptions);
+        } catch (NoLobbyException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

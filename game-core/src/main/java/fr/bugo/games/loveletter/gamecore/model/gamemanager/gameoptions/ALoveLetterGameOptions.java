@@ -1,7 +1,7 @@
 package fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions;
 
 import fr.bugo.games.loveletter.shareddata.enums.GameToPlay;
-import fr.bugo.games.loveletter.shareddata.models.AGameOptions;
+import fr.bugo.games.loveletter.shareddata.models.gameoptions.AGameOptions;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -4,7 +4,7 @@ import fr.bugo.games.loveletter.lobbycore.exceptions.MultipleOwnerException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoOwnerException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.UniqueNameException;
 import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
-import fr.bugo.games.loveletter.shareddata.models.AGameOptions;
+import fr.bugo.games.loveletter.shareddata.models.gameoptions.AGameOptions;
 import lombok.Data;
 
 import java.util.ArrayList;
