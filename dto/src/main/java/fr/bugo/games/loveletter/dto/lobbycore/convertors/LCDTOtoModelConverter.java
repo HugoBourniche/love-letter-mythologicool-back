@@ -9,6 +9,9 @@ import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
 import fr.bugo.games.loveletter.shareddata.models.User;
 import fr.bugo.games.loveletter.shareddata.models.gameoptions.GameOptionsRanges;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LCDTOtoModelConverter {
 
     // *****************************************************************************************************************
@@ -19,6 +22,22 @@ public class LCDTOtoModelConverter {
         User user = new User();
         user.setName(userDTO.getName());
         return user;
+    }
+
+    public static List<User> convertUsers(List<UserDTO> usersDTO) {
+        List<User> users = new ArrayList<>();
+        for (UserDTO userDTO : usersDTO) {
+            users.add(convert(userDTO));
+        }
+        return users;
+    }
+
+    public static List<LobbyUser> convert(List<LobbyUserDTO> usersDTO) {
+        List<LobbyUser> lobbyUsers = new ArrayList<>();
+        for (LobbyUserDTO userDTO : usersDTO) {
+            lobbyUsers.add(convert(userDTO));
+        }
+        return lobbyUsers;
     }
 
     public static LobbyUser convert(LobbyUserDTO userDTO) {

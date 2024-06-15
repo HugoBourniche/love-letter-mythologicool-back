@@ -28,7 +28,7 @@ public abstract class AGameManager<P extends APlayer, O extends AGameOptions> {
     // ABSTRACT METHODS
     // *****************************************************************************************************************
 
-    public abstract void initGame(O options, List<P> players);
+    public abstract void initGame(O options, List<User> users);
 
     // *****************************************************************************************************************
     // OVERRIDE METHODS
@@ -36,7 +36,7 @@ public abstract class AGameManager<P extends APlayer, O extends AGameOptions> {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("AGameManager{");
+        final StringBuilder sb = new StringBuilder("AGameManager{");
         sb.append(ToStringUtils.list(players, "players"));
         sb.append('}');
         return sb.toString();

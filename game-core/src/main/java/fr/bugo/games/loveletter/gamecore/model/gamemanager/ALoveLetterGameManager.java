@@ -39,13 +39,9 @@ public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extend
     // OVERRIDE METHODS
     // *****************************************************************************************************************
 
-
-    @Override
-    public abstract void initGame(O options, List<P> players);
-
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("ClassicLoveLetterGameManager{");
+        final StringBuilder sb = new StringBuilder("ClassicLoveLetterGameManager{");
         sb.append(super.toString());
         sb.append(", cardPile=").append(cardPile);
         sb.append(", discardPile=").append(discardPile);

@@ -4,7 +4,7 @@ import fr.bugo.games.loveletter.dto.gamecore.gamemanager.LoveLetterGameManagerDT
 import lombok.Data;
 
 @Data
-public class InitialisationResponse {
+public class ClassicLoveLetterGameInitialisationResponse {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
@@ -16,7 +16,7 @@ public class InitialisationResponse {
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public InitialisationResponse(LoveLetterGameManagerDTO gameManagerDTO) {
+    public ClassicLoveLetterGameInitialisationResponse(LoveLetterGameManagerDTO gameManagerDTO) {
         this.gameManagerDTO = gameManagerDTO;
     }
 }
