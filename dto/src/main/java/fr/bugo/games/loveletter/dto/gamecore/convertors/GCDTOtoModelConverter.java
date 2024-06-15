@@ -42,6 +42,7 @@ public class GCDTOtoModelConverter {
         player.setUser(user); // TODO Fix this
         player.setPosition(playerDTO.getPosition());
         player.setHand(convert(playerDTO.getHand()));
+        player.setNbFavorPeace(playerDTO.getNbFavorPeace());
         return player;
     }
 

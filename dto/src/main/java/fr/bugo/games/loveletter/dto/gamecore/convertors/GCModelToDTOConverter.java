@@ -65,6 +65,7 @@ public class GCModelToDTOConverter {
         playerDTO.setName(player.getUser().getName());
         playerDTO.setHand(convert(player.getHand()));
         playerDTO.setPosition(player.getPosition());
+        playerDTO.setNbFavorPeace(player.getNbFavorPeace());
         return playerDTO;
     }
 }

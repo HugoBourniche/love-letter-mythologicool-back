@@ -17,6 +17,7 @@ public class LoveLetterPlayerDTO extends APlayerDTO {
 
     protected List<LoveLetterCardDTO> hand = new ArrayList<>();
     protected Integer position;
+    protected Integer nbFavorPeace;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
