@@ -2,9 +2,10 @@ package fr.bugo.games.loveletter.api.controller;
 
 import fr.bugo.games.loveletter.api.pojo.request.ApplyGameOptionsRequest;
 import fr.bugo.games.loveletter.api.pojo.request.LobbyCreationRequest;
+import fr.bugo.games.loveletter.api.pojo.request.LobbyUserReadyRequest;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyItemListResponse;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyCreationResponse;
-import fr.bugo.games.loveletter.api.pojo.response.LobbyJoinRequest;
+import fr.bugo.games.loveletter.api.pojo.request.LobbyJoinRequest;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyJoinedResponse;
 import fr.bugo.games.loveletter.api.pojo.response.LobbyUpdateResponse;
 import fr.bugo.games.loveletter.api.services.LobbyService;
@@ -13,6 +14,7 @@ import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCDTOtoModelConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCModelToDTOConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyDTO;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
+import fr.bugo.games.loveletter.lobbycore.exceptions.NoUserInLobbyException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.UniqueNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
 import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
@@ -84,6 +86,19 @@ public class SimpleLobbyController {
 
         LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
         return new ResponseEntity<>(new LobbyJoinedResponse(lobbyDTO, request.getUser().getName()), HttpStatus.OK);
+    }
+
+    @PostMapping("/ready")
+    public ResponseEntity<?> ready(@RequestBody LobbyUserReadyRequest request) {
+        LOGGER.info("/lobby/ready/" + request.getLobbyKey() + "/" + request.getUserName());
+        Lobby lobby;
+        try {
+            lobby = lobbyService.userSwitchReady(request.getLobbyKey(), request.getUserName());
+        } catch (NoLobbyException | NoUserInLobbyException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        LobbyDTO lobbyDTO = LCModelToDTOConverter.convert(lobby);
+        return new ResponseEntity<>(new LobbyUpdateResponse(lobbyDTO), HttpStatus.OK);
     }
 
     @GetMapping("/update")
