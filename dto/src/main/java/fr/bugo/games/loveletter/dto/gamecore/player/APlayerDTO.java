@@ -1,5 +1,6 @@
 package fr.bugo.games.loveletter.dto.gamecore.player;
 
+import fr.bugo.games.loveletter.dto.lobbycore.UserDTO;
 import lombok.Data;
 
 @Data
@@ -9,7 +10,7 @@ public class APlayerDTO {
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected String name;
+    protected UserDTO user;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR

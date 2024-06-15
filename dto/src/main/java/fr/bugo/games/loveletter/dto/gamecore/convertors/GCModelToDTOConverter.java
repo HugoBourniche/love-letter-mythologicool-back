@@ -3,6 +3,7 @@ package fr.bugo.games.loveletter.dto.gamecore.convertors;
 import fr.bugo.games.loveletter.dto.gamecore.LoveLetterCardDTO;
 import fr.bugo.games.loveletter.dto.gamecore.gamemanager.LoveLetterGameManagerDTO;
 import fr.bugo.games.loveletter.dto.gamecore.player.LoveLetterPlayerDTO;
+import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCModelToDTOConverter;
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic.AClassicLoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.ClassicLoveLetterGameManager;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
@@ -62,7 +63,7 @@ public class GCModelToDTOConverter {
 
     public static LoveLetterPlayerDTO convert(ClassicLoveLetterPlayer player) {
         LoveLetterPlayerDTO playerDTO = new LoveLetterPlayerDTO();
-        playerDTO.setName(player.getUser().getName());
+        playerDTO.setUser(LCModelToDTOConverter.convert(player.getUser()));
         playerDTO.setHand(convert(player.getHand()));
         playerDTO.setPosition(player.getPosition());
         playerDTO.setNbFavorPeace(player.getNbFavorPeace());

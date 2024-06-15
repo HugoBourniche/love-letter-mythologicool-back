@@ -3,11 +3,11 @@ package fr.bugo.games.loveletter.dto.gamecore.convertors;
 import fr.bugo.games.loveletter.dto.gamecore.LoveLetterCardDTO;
 import fr.bugo.games.loveletter.dto.gamecore.gamemanager.gameoptions.LoveLetterGameOptionsDTO;
 import fr.bugo.games.loveletter.dto.gamecore.player.LoveLetterPlayerDTO;
+import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCDTOtoModelConverter;
 import fr.bugo.games.loveletter.gamecore.factory.card.ClassicLoveLetterCardFactory;
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic.AClassicLoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
-import fr.bugo.games.loveletter.shareddata.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +39,7 @@ public class GCDTOtoModelConverter {
 
     public static ClassicLoveLetterPlayer convert(LoveLetterPlayerDTO playerDTO) {
         ClassicLoveLetterPlayer player = new ClassicLoveLetterPlayer();
-        User user = new User(playerDTO.getName());
-        player.setUser(user); // TODO Fix this
+        player.setUser(LCDTOtoModelConverter.convert(playerDTO.getUser()));
         player.setPosition(playerDTO.getPosition());
         player.setHand(convert(playerDTO.getHand()));
         player.setNbFavorPeace(playerDTO.getNbFavorPeace());
