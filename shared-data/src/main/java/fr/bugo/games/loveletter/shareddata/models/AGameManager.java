@@ -1,11 +1,13 @@
 package fr.bugo.games.loveletter.shareddata.models;
 
+import fr.bugo.games.loveletter.shareddata.exceptions.NoUserException;
 import fr.bugo.games.loveletter.shareddata.models.gameoptions.AGameOptions;
 import fr.bugo.games.loveletter.shareddata.utils.ToStringUtils;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 public abstract class AGameManager<P extends APlayer, O extends AGameOptions> {
@@ -30,6 +32,17 @@ public abstract class AGameManager<P extends APlayer, O extends AGameOptions> {
 
     public abstract void initGame(O options, List<User> users);
 
+    // *****************************************************************************************************************
+    // PUBLIC METHODS
+    // *****************************************************************************************************************
+
+    public P getPlayer(String name) throws NoUserException {
+        Optional<P> optPlayer = this.players.stream().filter(p -> p.user.getName().equals(name)).findAny();
+        if (optPlayer.isEmpty()) {
+            throw new NoUserException(name);
+        }
+        return optPlayer.get();
+    }
     // *****************************************************************************************************************
     // OVERRIDE METHODS
     // *****************************************************************************************************************

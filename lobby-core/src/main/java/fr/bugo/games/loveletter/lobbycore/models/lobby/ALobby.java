@@ -21,6 +21,7 @@ public abstract class ALobby {
     private String key;
     private List<LobbyUser> users;
     private AGameOptions gameOptions;
+    private boolean isInGame;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
@@ -28,6 +29,7 @@ public abstract class ALobby {
 
     public ALobby() {
         this.users = new ArrayList<>();
+        this.isInGame = false;
     }
 
     // *****************************************************************************************************************

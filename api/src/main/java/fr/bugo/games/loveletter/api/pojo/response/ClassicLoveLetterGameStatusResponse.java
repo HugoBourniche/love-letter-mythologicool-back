@@ -1,27 +1,25 @@
-package fr.bugo.games.loveletter.dto.lobbycore;
+package fr.bugo.games.loveletter.api.pojo.response;
 
-import fr.bugo.games.loveletter.dto.gamecore.gamemanager.gameoptions.AGameOptionsDTO;
+import fr.bugo.games.loveletter.dto.gamecore.gamemanager.LoveLetterGameManagerDTO;
+import fr.bugo.games.loveletter.dto.gamecore.player.LoveLetterPlayerDTO;
 import lombok.Data;
 
-import java.io.Serializable;
-import java.util.List;
-
 @Data
-public class LobbyDTO implements Serializable {
+public class ClassicLoveLetterGameStatusResponse {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    private String key;
-    private List<LobbyUserDTO> users;
-    private AGameOptionsDTO options;
-    private boolean isInGame;
+    LoveLetterGameManagerDTO gameManagerDTO;
+    LoveLetterPlayerDTO playerDTO;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public LobbyDTO() {}
-
+    public ClassicLoveLetterGameStatusResponse(LoveLetterGameManagerDTO gameManagerDTO, LoveLetterPlayerDTO playerDTO) {
+        this.gameManagerDTO = gameManagerDTO;
+        this.playerDTO = playerDTO;
+    }
 }

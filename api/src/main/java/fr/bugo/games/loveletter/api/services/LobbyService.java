@@ -4,6 +4,7 @@ import fr.bugo.games.loveletter.gamecore.factory.GameOptionFactory;
 import fr.bugo.games.loveletter.lobbycore.exceptions.MultipleOwnerException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoOwnerException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoUserInLobbyException;
+import fr.bugo.games.loveletter.lobbycore.exceptions.NotReadyPlayerException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.UniqueNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
 import fr.bugo.games.loveletter.lobbycore.models.lobby.Lobby;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LobbyService {
@@ -42,9 +44,7 @@ public class LobbyService {
         lobby.setKey(LobbyKeyCreator.generateKey(lobbiesMap.keySet()));
         try {
             lobby.addNewUser(new LobbyUser(owner, true));
-        } catch (UniqueNameException e) {
-            e.printStackTrace(); // Should not be triggered here
-        }
+        } catch (UniqueNameException ignore) {}
         lobby.setGameOptions(GameOptionFactory.createGameOptions(game));
         this.lobbiesMap.put(lobby.getKey(), lobby);
         return lobby;
@@ -68,6 +68,17 @@ public class LobbyService {
         Lobby lobby = this.getLobby(lobbyKey);
         lobby.setGameOptions(gameOptions);
         return true;
+    }
+
+    public List<User> startGame(String lobbyKey) throws NoLobbyException, NotReadyPlayerException {
+        Lobby lobby = this.getLobby(lobbyKey);
+        for (LobbyUser lobbyUser : lobby.getUsers()) {
+            if (!lobbyUser.isOwner() && !lobbyUser.isReady()) {
+                throw new NotReadyPlayerException();
+            }
+        }
+        lobby.setInGame(true);
+        return lobby.getUsers().stream().map(lobbyUser -> new User(lobbyUser.getName())).collect(Collectors.toList());
     }
 
     // GETTERS
