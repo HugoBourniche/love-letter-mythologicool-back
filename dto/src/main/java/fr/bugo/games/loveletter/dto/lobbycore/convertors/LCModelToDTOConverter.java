@@ -28,6 +28,7 @@ public class LCModelToDTOConverter {
         lobbyDTO.setKey(lobby.getKey());
         lobbyDTO.setUsers(convert(lobby.getUsers()));
         lobbyDTO.setOptions(convert(lobby.getGameOptions()));
+        lobbyDTO.setInGame(lobby.isInGame());
         return lobbyDTO;
     }
 

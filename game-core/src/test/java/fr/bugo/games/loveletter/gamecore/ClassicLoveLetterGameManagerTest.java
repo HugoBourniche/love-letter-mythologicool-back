@@ -3,6 +3,7 @@ package fr.bugo.games.loveletter.gamecore;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.ClassicLoveLetterGameManager;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
+import fr.bugo.games.loveletter.lobbycore.models.users.LobbyUser;
 import fr.bugo.games.loveletter.shareddata.models.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,7 @@ public class ClassicLoveLetterGameManagerTest {
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    private final List<User> users = new ArrayList<User>();
+    private final List<User> users = new ArrayList<>();
     private final List<ClassicLoveLetterPlayer> players = new ArrayList<>();
 
     // *****************************************************************************************************************
@@ -51,9 +52,9 @@ public class ClassicLoveLetterGameManagerTest {
     @CsvSource(value = {"2:15", "3:17", "4:16", "5:15", "6:14"}, delimiter = ':')
     public void nbPlayersTest(int nbPlayers, int expectedCardsInPile) {
         ClassicLoveLetterGameOptions options = new ClassicLoveLetterGameOptions();
-        List<ClassicLoveLetterPlayer> players = fetchPlayers(nbPlayers);
+        List<User> users = fetchUsers(nbPlayers);
         ClassicLoveLetterGameManager gm = new ClassicLoveLetterGameManager();
-        gm.initGame(options, players);
+        gm.initGame(options, users);
         System.out.println(gm);
         Assertions.assertEquals(expectedCardsInPile, gm.getCardPile().size(), "The stack does not have the right number of cards");
         for (ClassicLoveLetterPlayer player : gm.getPlayers()) {
@@ -71,5 +72,13 @@ public class ClassicLoveLetterGameManagerTest {
             currentPlayers.add(players.get(i));
         }
         return currentPlayers;
+    }
+
+    private List<User> fetchUsers(int nbUsers) {
+        List<User> currentUsers = new ArrayList<>();
+        for (int i = 0; i < nbUsers; i++) {
+            currentUsers.add(users.get(i));
+        }
+        return currentUsers;
     }
 }
