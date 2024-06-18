@@ -40,8 +40,12 @@ public class LobbyService {
     // *****************************************************************************************************************
 
     public Lobby createLobby(User owner, GameToPlay game) {
+        return this.createLobby(owner, game, null);
+    }
+
+    public Lobby createLobby(User owner, GameToPlay game, String lobbyKey) {
         Lobby lobby = new Lobby();
-        lobby.setKey(LobbyKeyCreator.generateKey(lobbiesMap.keySet()));
+        lobby.setKey(lobbyKey == null ?LobbyKeyCreator.generateKey(lobbiesMap.keySet()): lobbyKey);
         try {
             lobby.addNewUser(new LobbyUser(owner, true));
         } catch (UniqueNameException ignore) {}
