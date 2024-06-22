@@ -13,7 +13,8 @@ public abstract class AGameManagerDTO<P extends APlayerDTO> implements Serializa
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected List<P> players;
+    protected P currentPlayer;
+    protected List<P> otherPlayers;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR

@@ -5,9 +5,8 @@ import fr.bugo.games.loveletter.api.pojo.request.LoveLetterGameStatusRequest;
 import fr.bugo.games.loveletter.api.services.ClassicLoveLetterGameManagerService;
 import fr.bugo.games.loveletter.api.services.LobbyService;
 import fr.bugo.games.loveletter.dto.gamecore.convertors.GCModelToDTOConverter;
-import fr.bugo.games.loveletter.dto.gamecore.gamemanager.LoveLetterGameManagerDTO;
 import fr.bugo.games.loveletter.api.pojo.response.ClassicLoveLetterGameStatusResponse;
-import fr.bugo.games.loveletter.dto.gamecore.player.LoveLetterPlayerDTO;
+import fr.bugo.games.loveletter.dto.gamecore.gamemanager.LoveLetterGameManagerDTO;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.ClassicLoveLetterGameManager;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
@@ -73,9 +72,8 @@ public class ClassicLoveLetterGameController {
         LOGGER.info("/loveletter/classic/status/" + request.getLobbyKey() + "/" + request.getPlayerName());
         ClassicLoveLetterGameManager gameManager = gameManagerService.getGameManager(request.getLobbyKey());
         ClassicLoveLetterPlayer currentPlayer = gameManager.getPlayer(request.getPlayerName());
-        LoveLetterGameManagerDTO gameManagerDTO = GCModelToDTOConverter.convert(gameManager);
-        LoveLetterPlayerDTO playerDTO = GCModelToDTOConverter.convert(currentPlayer);
-        return new ResponseEntity<>(new ClassicLoveLetterGameStatusResponse(gameManagerDTO, playerDTO), HttpStatus.OK);
+        LoveLetterGameManagerDTO currentPlayerGameManagerDTO = GCModelToDTOConverter.convert(gameManager, currentPlayer, true);
+        return new ResponseEntity<>(new ClassicLoveLetterGameStatusResponse(currentPlayerGameManagerDTO), HttpStatus.OK);
     }
 
     // *****************************************************************************************************************
