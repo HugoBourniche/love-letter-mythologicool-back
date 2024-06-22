@@ -18,13 +18,13 @@ public class GCModelToDTOConverter {
     // CONVERT GAME MANAGER
     // *****************************************************************************************************************
 
-    public static LoveLetterGameManagerDTO convert(ClassicLoveLetterGameManager gameManager, ClassicLoveLetterPlayer currentPlayer, boolean hideOtherPlayerCards) {
+    public static LoveLetterGameManagerDTO convert(ClassicLoveLetterGameManager gameManager, ClassicLoveLetterPlayer currentPlayer, boolean showCards) {
         LoveLetterGameManagerDTO gameManagerDTO = new LoveLetterGameManagerDTO();
-        gameManagerDTO.setCurrentPlayer(convert(currentPlayer));
-        gameManagerDTO.setOtherPlayers(convertOtherPlayers(gameManager.getPlayers(), currentPlayer, hideOtherPlayerCards));
-        gameManagerDTO.setCardPile(convert(gameManager.getCardPile().getStack()));
-        gameManagerDTO.setDiscardPile(convert(gameManager.getDiscardPile().getStack()));
-        gameManagerDTO.setAsideCard(convert(gameManager.getAsideCard()));
+        gameManagerDTO.setCurrentPlayer(convert(currentPlayer, true));
+        gameManagerDTO.setOtherPlayers(convertOtherPlayers(gameManager.getPlayers(), currentPlayer, showCards));
+        gameManagerDTO.setCardPile(convert(gameManager.getCardPile().getStack(), showCards));
+        gameManagerDTO.setDiscardPile(convert(gameManager.getDiscardPile().getStack(), showCards));
+        gameManagerDTO.setAsideCard(convert(gameManager.getAsideCard(), showCards));
         gameManagerDTO.setPlayerTurn(gameManager.getPlayerTurn());
         return gameManagerDTO;
     }
@@ -33,39 +33,22 @@ public class GCModelToDTOConverter {
     // CONVERT CARDS
     // *****************************************************************************************************************
 
-    public static List<LoveLetterCardDTO> convert(List<AClassicLoveLetterCard> cards) {
+    public static List<LoveLetterCardDTO> convert(List<AClassicLoveLetterCard> cards, boolean showCards) {
         List<LoveLetterCardDTO> cardsDTO = new ArrayList<>();
         for (AClassicLoveLetterCard card : cards) {
-            cardsDTO.add(convert(card));
+            cardsDTO.add(convert(card, showCards));
         }
         return cardsDTO;
     }
 
-    public static LoveLetterCardDTO convert(AClassicLoveLetterCard card) {
+    public static LoveLetterCardDTO convert(AClassicLoveLetterCard card, boolean showCards) {
+        boolean showCardToPlayer = showCards || !card.isFacingDown();
         LoveLetterCardDTO cardDTO = new LoveLetterCardDTO();
-        cardDTO.setId(card.getId().toString());
-        cardDTO.setSpriteId(card.getSpriteId());
+        cardDTO.setId(showCardToPlayer ? card.getId().toString() : "no-id");
+        cardDTO.setSpriteId(showCardToPlayer ? card.getSpriteId() : CardFactory.backCardSpriteId("classic"));
         cardDTO.setFacingDown(card.isFacingDown());
-        cardDTO.setName(card.getName());
-        cardDTO.setValue(card.getValue());
-        return cardDTO;
-    }
-
-    public static List<LoveLetterCardDTO> getHiddenCards(int nbCards) {
-        List<LoveLetterCardDTO> cards = new ArrayList<>();
-        for (int i = 0; i < nbCards; i++) {
-            cards.add(getHiddenCard());
-        }
-        return cards;
-    }
-
-    public static LoveLetterCardDTO getHiddenCard() {
-        LoveLetterCardDTO cardDTO = new LoveLetterCardDTO();
-        cardDTO.setId("no-id");
-        cardDTO.setSpriteId(CardFactory.backCardSpriteId("classic")); // TODO update this
-        cardDTO.setFacingDown(true);
-        cardDTO.setName("card");
-        cardDTO.setValue(-1);
+        cardDTO.setName(showCardToPlayer ? card.getName() : "card");
+        cardDTO.setValue(showCardToPlayer ? card.getValue() : -1);
         return cardDTO;
     }
 
@@ -73,41 +56,27 @@ public class GCModelToDTOConverter {
     // CONVERT PLAYERS
     // *****************************************************************************************************************
 
-    public static List<LoveLetterPlayerDTO> convertPlayers(List<ClassicLoveLetterPlayer> players) {
+    public static List<LoveLetterPlayerDTO> convertPlayers(List<ClassicLoveLetterPlayer> players, boolean showCards) {
         List<LoveLetterPlayerDTO> playersDTO = new ArrayList<>();
         for (ClassicLoveLetterPlayer player : players) {
-            playersDTO.add(convert(player));
+            playersDTO.add(convert(player, showCards));
         }
         return playersDTO;
     }
 
-    public static List<LoveLetterPlayerDTO> convertOtherPlayers(List<ClassicLoveLetterPlayer> players, ClassicLoveLetterPlayer currentPlayer, boolean hideOtherPlayerCards) {
+    public static List<LoveLetterPlayerDTO> convertOtherPlayers(List<ClassicLoveLetterPlayer> players, ClassicLoveLetterPlayer currentPlayer, boolean showCards) {
         List<LoveLetterPlayerDTO> otherPlayersDTO = new ArrayList<>();
         // Reorder the list to match with the current player as 0 and the next player is following
         for (int i = (currentPlayer.getPosition() + 1)%players.size(); i != currentPlayer.getPosition(); i=(i+1)%players.size()) {
-            ClassicLoveLetterPlayer player = players.get(i);
-            if (hideOtherPlayerCards) {
-                otherPlayersDTO.add(convertHiddenHandPlayer(player));
-            } else {
-                otherPlayersDTO.add(convert(player));
-            }
+            otherPlayersDTO.add(convert(players.get(i), showCards));
         }
         return otherPlayersDTO;
     }
 
-    public static LoveLetterPlayerDTO convertHiddenHandPlayer(ClassicLoveLetterPlayer player) {
+    public static LoveLetterPlayerDTO convert(ClassicLoveLetterPlayer player, boolean showCards) {
         LoveLetterPlayerDTO playerDTO = new LoveLetterPlayerDTO();
         playerDTO.setUser(LCModelToDTOConverter.convert(player.getUser()));
-        playerDTO.setHand(getHiddenCards(player.getHand().size()));
-        playerDTO.setPosition(player.getPosition());
-        playerDTO.setNbFavorPeace(player.getNbFavorPeace());
-        return playerDTO;
-    }
-
-    public static LoveLetterPlayerDTO convert(ClassicLoveLetterPlayer player) {
-        LoveLetterPlayerDTO playerDTO = new LoveLetterPlayerDTO();
-        playerDTO.setUser(LCModelToDTOConverter.convert(player.getUser()));
-        playerDTO.setHand(convert(player.getHand()));
+        playerDTO.setHand(convert(player.getHand(), showCards));
         playerDTO.setPosition(player.getPosition());
         playerDTO.setNbFavorPeace(player.getNbFavorPeace());
         return playerDTO;

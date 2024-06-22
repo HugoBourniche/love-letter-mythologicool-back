@@ -72,7 +72,7 @@ public class ClassicLoveLetterGameController {
         LOGGER.info("/loveletter/classic/status/" + request.getLobbyKey() + "/" + request.getPlayerName());
         ClassicLoveLetterGameManager gameManager = gameManagerService.getGameManager(request.getLobbyKey());
         ClassicLoveLetterPlayer currentPlayer = gameManager.getPlayer(request.getPlayerName());
-        LoveLetterGameManagerDTO currentPlayerGameManagerDTO = GCModelToDTOConverter.convert(gameManager, currentPlayer, true);
+        LoveLetterGameManagerDTO currentPlayerGameManagerDTO = GCModelToDTOConverter.convert(gameManager, currentPlayer, false);
         return new ResponseEntity<>(new ClassicLoveLetterGameStatusResponse(currentPlayerGameManagerDTO), HttpStatus.OK);
     }
 
