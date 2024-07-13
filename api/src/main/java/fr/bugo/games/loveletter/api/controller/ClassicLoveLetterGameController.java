@@ -10,6 +10,7 @@ import fr.bugo.games.loveletter.dto.gamecore.gamemanager.LoveLetterGameManagerDT
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.ClassicLoveLetterGameManager;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
+import fr.bugo.games.loveletter.lobbycore.exceptions.InvalidNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoUserInLobbyException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NotReadyPlayerException;
@@ -84,7 +85,7 @@ public class ClassicLoveLetterGameController {
      * Temporary function to test stuff
      */
     @EventListener(ApplicationReadyEvent.class)
-    public void dosomething() throws UniqueNameException, NoLobbyException, NotReadyPlayerException, NoUserException, NoUserInLobbyException {
+    public void dosomething() throws UniqueNameException, NoLobbyException, NotReadyPlayerException, NoUserException, NoUserInLobbyException, InvalidNameException {
         System.out.println("Do something");
         User owner = new User("Theo");
         User user2 = new User("Thomas");
