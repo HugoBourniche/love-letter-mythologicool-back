@@ -1,5 +1,6 @@
 package fr.bugo.games.loveletter.api.services;
 
+import fr.bugo.games.loveletter.lobbycore.exceptions.InvalidNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.MultipleOwnerException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoOwnerException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.UniqueNameException;
@@ -21,7 +22,7 @@ public class LobbyServiceTest {
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    private final List<User> users = new ArrayList<User>();
+    private final List<User> users = new ArrayList<>();
     LobbyService lobbyService;
     // *****************************************************************************************************************
     // BEFORE
@@ -78,6 +79,8 @@ public class LobbyServiceTest {
             Assertions.fail("The lobby should exist");
         } catch (UniqueNameException e) {
             Assertions.fail("Should not have the same name");
+        } catch (InvalidNameException e) {
+            Assertions.fail("The name is supposed to be valid");
         }
         Assertions.assertEquals(2, lobby.getUsers().size());
     }
@@ -91,6 +94,8 @@ public class LobbyServiceTest {
             Assertions.fail("The lobby should not be valid");
         } catch (NoLobbyException e) {
             Assertions.fail("Lobby should exists");
+        } catch (InvalidNameException e) {
+            Assertions.fail("The name is supposed to be valid");
         } catch (UniqueNameException ignore) {}
         Assertions.assertEquals(2, lobby.getUsers().size());
     }
@@ -104,6 +109,8 @@ public class LobbyServiceTest {
         } catch (NoLobbyException ignore) {
         } catch (UniqueNameException e) {
             Assertions.fail("Should not have the same name");
+        } catch (InvalidNameException e) {
+            Assertions.fail("The name is supposed to be valid");
         }
         Assertions.assertEquals(1, lobby.getUsers().size());
 

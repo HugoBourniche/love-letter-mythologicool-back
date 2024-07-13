@@ -14,6 +14,7 @@ import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCDTOtoModelConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCModelToDTOConverter;
 import fr.bugo.games.loveletter.dto.lobbycore.LobbyDTO;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
+import fr.bugo.games.loveletter.lobbycore.exceptions.InvalidNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoUserInLobbyException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.UniqueNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
@@ -80,7 +81,7 @@ public class SimpleLobbyController {
             lobby = lobbyService.joinLobby(request.getLobbyKey(), user);
         } catch (NoLobbyException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (UniqueNameException e) {
+        } catch (UniqueNameException | InvalidNameException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         }
 

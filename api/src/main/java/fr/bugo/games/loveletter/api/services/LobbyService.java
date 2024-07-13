@@ -1,6 +1,7 @@
 package fr.bugo.games.loveletter.api.services;
 
 import fr.bugo.games.loveletter.gamecore.factory.GameOptionFactory;
+import fr.bugo.games.loveletter.lobbycore.exceptions.InvalidNameException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.MultipleOwnerException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoOwnerException;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoUserInLobbyException;
@@ -54,7 +55,10 @@ public class LobbyService {
         return lobby;
     }
 
-    public Lobby joinLobby(String key, User user) throws NoLobbyException, UniqueNameException {
+    public Lobby joinLobby(String key, User user) throws NoLobbyException, UniqueNameException, InvalidNameException {
+        if ("".equals(user.getName().trim())) {
+            throw new InvalidNameException(user.getName());
+        }
         Lobby lobby = getLobby(key);
         LobbyUser lobbyUser = new LobbyUser(user);
         lobby.addNewUser(lobbyUser);
