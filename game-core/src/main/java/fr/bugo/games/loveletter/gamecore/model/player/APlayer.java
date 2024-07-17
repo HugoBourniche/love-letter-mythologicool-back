@@ -1,5 +1,6 @@
-package fr.bugo.games.loveletter.shareddata.models;
+package fr.bugo.games.loveletter.gamecore.model.player;
 
+import fr.bugo.games.loveletter.shareddata.models.User;
 import lombok.Data;
 
 @Data

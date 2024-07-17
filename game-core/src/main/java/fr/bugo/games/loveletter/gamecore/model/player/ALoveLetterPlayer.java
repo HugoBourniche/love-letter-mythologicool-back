@@ -3,7 +3,6 @@ package fr.bugo.games.loveletter.gamecore.model.player;
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.ALoveLetterCard;
 import fr.bugo.games.loveletter.shareddata.models.User;
 import fr.bugo.games.loveletter.shareddata.utils.ToStringUtils;
-import fr.bugo.games.loveletter.shareddata.models.APlayer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

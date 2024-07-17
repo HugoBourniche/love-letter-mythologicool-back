@@ -1,10 +1,10 @@
 package fr.bugo.games.loveletter.gamecore.model.gamemanager;
 
+import fr.bugo.games.loveletter.gamecore.model.action.ALoveLetterRequestedAction;
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.ALoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ALoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ALoveLetterPlayer;
 import fr.bugo.games.loveletter.gamecore.model.stack.CardStack;
-import fr.bugo.games.loveletter.shareddata.models.AGameManager;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extends ALoveLetterPlayer<C>, O extends ALoveLetterGameOptions> extends AGameManager<P, O> {
+public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extends ALoveLetterPlayer<C>, A extends ALoveLetterRequestedAction<C, P>, O extends ALoveLetterGameOptions> extends AGameManager<P, A, O> {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
