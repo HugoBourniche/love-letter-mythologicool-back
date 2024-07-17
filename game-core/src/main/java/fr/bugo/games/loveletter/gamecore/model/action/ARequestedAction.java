@@ -1,28 +1,24 @@
-package fr.bugo.games.loveletter.dto.gamecore.gamemanager;
+package fr.bugo.games.loveletter.gamecore.model.action;
 
-import fr.bugo.games.loveletter.dto.gamecore.action.ARequestedActionDTO;
-import fr.bugo.games.loveletter.dto.gamecore.player.APlayerDTO;
+import fr.bugo.games.loveletter.gamecore.model.player.APlayer;
 import lombok.Data;
 
-import java.io.Serializable;
-import java.util.List;
-
 @Data
-public abstract class AGameManagerDTO<P extends APlayerDTO, A extends ARequestedActionDTO> implements Serializable {
+public abstract class ARequestedAction<P extends APlayer> {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
-    protected P currentPlayer;
-    protected List<P> otherPlayers;
-    protected A requestedAction;
+    protected P player;
+    protected EAction action;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
     // *****************************************************************************************************************
 
-    public AGameManagerDTO() {
+    protected ARequestedAction(P player, EAction action) {
+        this.player = player;
+        this.action = action;
     }
-
 }

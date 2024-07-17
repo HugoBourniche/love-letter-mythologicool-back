@@ -1,10 +1,12 @@
 package fr.bugo.games.loveletter.dto.gamecore.convertors;
 
 import fr.bugo.games.loveletter.dto.gamecore.LoveLetterCardDTO;
+import fr.bugo.games.loveletter.dto.gamecore.action.LoveLetterRequestedActionDTO;
 import fr.bugo.games.loveletter.dto.gamecore.gamemanager.LoveLetterGameManagerDTO;
 import fr.bugo.games.loveletter.dto.gamecore.player.LoveLetterPlayerDTO;
 import fr.bugo.games.loveletter.dto.lobbycore.convertors.LCModelToDTOConverter;
 import fr.bugo.games.loveletter.gamecore.factory.card.CardFactory;
+import fr.bugo.games.loveletter.gamecore.model.action.ClassicLoveLetterRequestedAction;
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic.AClassicLoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.ClassicLoveLetterGameManager;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
@@ -22,9 +24,13 @@ public class GCModelToDTOConverter {
         LoveLetterGameManagerDTO gameManagerDTO = new LoveLetterGameManagerDTO();
         gameManagerDTO.setCurrentPlayer(convert(currentPlayer, true));
         gameManagerDTO.setOtherPlayers(convertOtherPlayers(gameManager.getPlayers(), currentPlayer, showCards));
-        gameManagerDTO.setCardPile(convert(gameManager.getCardPile().getStack(), showCards));
-        gameManagerDTO.setDiscardPile(convert(gameManager.getDiscardPile().getStack(), showCards));
-        gameManagerDTO.setAsideCard(convert(gameManager.getAsideCard(), showCards));
+        if (!gameManager.getRequestedActions().isEmpty()) {
+            // Send only the first action required
+            gameManagerDTO.setRequestedAction(convert(gameManager.getRequestedActions().get(0)));
+        }
+        gameManagerDTO.setCardPile(convertCards(gameManager.getCardPile().getStack(), showCards));
+        gameManagerDTO.setDiscardPile(convertCards(gameManager.getDiscardPile().getStack(), showCards));
+        gameManagerDTO.setAsideCard(convertCards(gameManager.getAsideCard(), showCards));
         gameManagerDTO.setPlayerTurn(gameManager.getPlayerTurn());
         return gameManagerDTO;
     }
@@ -33,7 +39,7 @@ public class GCModelToDTOConverter {
     // CONVERT CARDS
     // *****************************************************************************************************************
 
-    public static List<LoveLetterCardDTO> convert(List<AClassicLoveLetterCard> cards, boolean showCards) {
+    public static List<LoveLetterCardDTO> convertCards(List<AClassicLoveLetterCard> cards, boolean showCards) {
         List<LoveLetterCardDTO> cardsDTO = new ArrayList<>();
         for (AClassicLoveLetterCard card : cards) {
             cardsDTO.add(convert(card, showCards));
@@ -76,9 +82,28 @@ public class GCModelToDTOConverter {
     public static LoveLetterPlayerDTO convert(ClassicLoveLetterPlayer player, boolean showCards) {
         LoveLetterPlayerDTO playerDTO = new LoveLetterPlayerDTO();
         playerDTO.setUser(LCModelToDTOConverter.convert(player.getUser()));
-        playerDTO.setHand(convert(player.getHand(), showCards));
+        playerDTO.setHand(convertCards(player.getHand(), showCards));
         playerDTO.setPosition(player.getPosition());
         playerDTO.setNbFavorPeace(player.getNbFavorPeace());
         return playerDTO;
+    }
+
+    // *****************************************************************************************************************
+    // REQUESTED ACTIONS
+    // *****************************************************************************************************************
+
+    public static List<LoveLetterRequestedActionDTO> convert(List<ClassicLoveLetterRequestedAction> actions) {
+        List<LoveLetterRequestedActionDTO> actionsDTO = new ArrayList<>();
+        for (ClassicLoveLetterRequestedAction action : actions) {
+            actionsDTO.add(convert(action));
+        }
+        return actionsDTO;
+    }
+
+    public static LoveLetterRequestedActionDTO convert(ClassicLoveLetterRequestedAction action) {
+        LoveLetterRequestedActionDTO actionDTO = new LoveLetterRequestedActionDTO();
+        actionDTO.setPlayerName(action.getPlayer().getUser().getName());
+        actionDTO.setAction(action.getAction().name());
+        return actionDTO;
     }
 }

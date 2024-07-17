@@ -2,6 +2,8 @@ package fr.bugo.games.loveletter.gamecore.model.gamemanager;
 
 import fr.bugo.games.loveletter.gamecore.exceptions.EmptyCardStackException;
 import fr.bugo.games.loveletter.gamecore.factory.card.ClassicLoveLetterCardFactory;
+import fr.bugo.games.loveletter.gamecore.model.action.ClassicLoveLetterRequestedAction;
+import fr.bugo.games.loveletter.gamecore.model.action.EAction;
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic.AClassicLoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
@@ -11,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class ClassicLoveLetterGameManager extends ALoveLetterGameManager<AClassicLoveLetterCard, ClassicLoveLetterPlayer, ClassicLoveLetterGameOptions> {
+public class ClassicLoveLetterGameManager extends ALoveLetterGameManager<AClassicLoveLetterCard, ClassicLoveLetterPlayer, ClassicLoveLetterRequestedAction, ClassicLoveLetterGameOptions> {
 
     // *****************************************************************************************************************
     // CONSTANTS
@@ -50,6 +52,7 @@ public class ClassicLoveLetterGameManager extends ALoveLetterGameManager<AClassi
                 this.players.add(player);
             }
             playerTurn = 0;
+            requestedActions.add(new ClassicLoveLetterRequestedAction(this.players.get(playerTurn), EAction.DRAW));
         } catch (EmptyCardStackException e) {
             LOGGER.error("Impossible to start the game, an error has occurred during the card dealing, it is empty");
         }

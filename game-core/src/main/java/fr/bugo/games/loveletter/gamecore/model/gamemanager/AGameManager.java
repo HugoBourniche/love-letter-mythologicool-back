@@ -1,6 +1,9 @@
-package fr.bugo.games.loveletter.shareddata.models;
+package fr.bugo.games.loveletter.gamecore.model.gamemanager;
 
+import fr.bugo.games.loveletter.gamecore.model.action.ARequestedAction;
 import fr.bugo.games.loveletter.shareddata.exceptions.NoUserException;
+import fr.bugo.games.loveletter.gamecore.model.player.APlayer;
+import fr.bugo.games.loveletter.shareddata.models.User;
 import fr.bugo.games.loveletter.shareddata.models.gameoptions.AGameOptions;
 import fr.bugo.games.loveletter.shareddata.utils.ToStringUtils;
 import lombok.Data;
@@ -10,13 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Data
-public abstract class AGameManager<P extends APlayer, O extends AGameOptions> {
+public abstract class AGameManager<P extends APlayer, A extends ARequestedAction<P>, O extends AGameOptions> {
 
     // *****************************************************************************************************************
     // ATTRIBUTES
     // *****************************************************************************************************************
 
     protected List<P> players;
+    protected List<A> requestedActions;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
@@ -24,6 +28,7 @@ public abstract class AGameManager<P extends APlayer, O extends AGameOptions> {
 
     public AGameManager() {
         this.players = new ArrayList<>();
+        this.requestedActions = new ArrayList<>();
     }
 
     // *****************************************************************************************************************
@@ -37,12 +42,13 @@ public abstract class AGameManager<P extends APlayer, O extends AGameOptions> {
     // *****************************************************************************************************************
 
     public P getPlayer(String name) throws NoUserException {
-        Optional<P> optPlayer = this.players.stream().filter(p -> p.user.getName().equals(name)).findAny();
+        Optional<P> optPlayer = this.players.stream().filter(p -> p.getUser().getName().equals(name)).findAny();
         if (optPlayer.isEmpty()) {
             throw new NoUserException(name);
         }
         return optPlayer.get();
     }
+
     // *****************************************************************************************************************
     // OVERRIDE METHODS
     // *****************************************************************************************************************
@@ -51,6 +57,7 @@ public abstract class AGameManager<P extends APlayer, O extends AGameOptions> {
     public String toString() {
         final StringBuilder sb = new StringBuilder("AGameManager{");
         sb.append(ToStringUtils.list(players, "players"));
+        sb.append(ToStringUtils.list(requestedActions, "requestedActions"));
         sb.append('}');
         return sb.toString();
     }
