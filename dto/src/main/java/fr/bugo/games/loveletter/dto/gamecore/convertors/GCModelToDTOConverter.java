@@ -32,6 +32,7 @@ public class GCModelToDTOConverter {
         gameManagerDTO.setDiscardPile(convertCards(gameManager.getDiscardPile().getStack(), showCards));
         gameManagerDTO.setAsideCard(convertCards(gameManager.getAsideCard(), showCards));
         gameManagerDTO.setPlayerTurn(gameManager.getPlayerTurnIndex());
+        gameManagerDTO.setRoundNumber(gameManager.getRoundNumber());
         return gameManagerDTO;
     }
 
