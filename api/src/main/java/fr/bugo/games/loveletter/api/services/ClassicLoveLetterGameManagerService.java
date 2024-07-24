@@ -28,6 +28,7 @@ public class ClassicLoveLetterGameManagerService {
 
     public void initializeGame(String lobbyKey, ClassicLoveLetterGameOptions gameOptions, List<User> players) {
         ClassicLoveLetterGameManager gameManager = new ClassicLoveLetterGameManager();
+        gameManager.setAccessKey(lobbyKey);
         gameManager.initGame(gameOptions, players);
         gameManagersMap.put(lobbyKey, gameManager);
     }

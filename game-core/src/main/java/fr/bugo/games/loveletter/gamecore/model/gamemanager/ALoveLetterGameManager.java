@@ -1,10 +1,12 @@
 package fr.bugo.games.loveletter.gamecore.model.gamemanager;
 
+import fr.bugo.games.loveletter.gamecore.exceptions.EmptyCardStackException;
 import fr.bugo.games.loveletter.gamecore.model.action.ALoveLetterRequestedAction;
 import fr.bugo.games.loveletter.gamecore.model.card.loveletter.ALoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ALoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ALoveLetterPlayer;
 import fr.bugo.games.loveletter.gamecore.model.stack.CardStack;
+import fr.bugo.games.loveletter.shareddata.exceptions.NoUserException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -49,4 +51,20 @@ public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extend
         sb.append('}');
         return sb.toString();
     }
+
+    // *****************************************************************************************************************
+    // PRIVATE METHODS
+    // *****************************************************************************************************************
+
+    protected C playerDrawCard(P player) throws EmptyCardStackException {
+        C card = cardPile.drawCard();
+        player.dealCard(card);
+        return card;
+    }
+
+    protected C playerDrawCard(String playerName) throws EmptyCardStackException, NoUserException {
+        P player = this.getPlayer(playerName);
+        return playerDrawCard(player);
+    }
+
 }

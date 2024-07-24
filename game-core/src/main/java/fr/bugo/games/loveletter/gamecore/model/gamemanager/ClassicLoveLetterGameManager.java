@@ -1,6 +1,7 @@
 package fr.bugo.games.loveletter.gamecore.model.gamemanager;
 
 import fr.bugo.games.loveletter.gamecore.exceptions.EmptyCardStackException;
+import fr.bugo.games.loveletter.gamecore.factory.GameRequestedActionsFactory;
 import fr.bugo.games.loveletter.gamecore.factory.card.ClassicLoveLetterCardFactory;
 import fr.bugo.games.loveletter.gamecore.model.action.ClassicLoveLetterRequestedAction;
 import fr.bugo.games.loveletter.gamecore.model.action.EAction;
@@ -48,13 +49,26 @@ public class ClassicLoveLetterGameManager extends ALoveLetterGameManager<AClassi
             for (int position = 0; position < users.size(); position++) {
                 User user = users.get(position);
                 ClassicLoveLetterPlayer player = new ClassicLoveLetterPlayer(user, position);
-                player.dealCard(cardPile.drawCard());
                 this.players.add(player);
+                this.playerDrawCard(player);
             }
             playerTurn = 0;
-            requestedActions.add(new ClassicLoveLetterRequestedAction(this.players.get(playerTurn), EAction.DRAW));
+            this.startTurn(this.players.get(playerTurn));
         } catch (EmptyCardStackException e) {
             LOGGER.error("Impossible to start the game, an error has occurred during the card dealing, it is empty");
+        }
+    }
+
+    @Override
+    public void startTurn(ClassicLoveLetterPlayer player) {
+        List<EAction> actions = GameRequestedActionsFactory.fetchDefaultClassicLoveLetterActions();
+        this.addRequestedActions(player, actions);
+    }
+
+    @Override
+    public void addRequestedActions(ClassicLoveLetterPlayer player, List<EAction> actions) {
+        for (EAction action : actions) {
+            this.requestedActions.add(new ClassicLoveLetterRequestedAction(player, action));
         }
     }
 

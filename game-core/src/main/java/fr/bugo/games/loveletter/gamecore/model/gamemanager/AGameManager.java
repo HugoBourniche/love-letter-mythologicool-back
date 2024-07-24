@@ -1,6 +1,7 @@
 package fr.bugo.games.loveletter.gamecore.model.gamemanager;
 
 import fr.bugo.games.loveletter.gamecore.model.action.ARequestedAction;
+import fr.bugo.games.loveletter.gamecore.model.action.EAction;
 import fr.bugo.games.loveletter.shareddata.exceptions.NoUserException;
 import fr.bugo.games.loveletter.gamecore.model.player.APlayer;
 import fr.bugo.games.loveletter.shareddata.models.User;
@@ -19,6 +20,7 @@ public abstract class AGameManager<P extends APlayer, A extends ARequestedAction
     // ATTRIBUTES
     // *****************************************************************************************************************
 
+    protected String accessKey;
     protected List<P> players;
     protected List<A> requestedActions;
 
@@ -36,6 +38,8 @@ public abstract class AGameManager<P extends APlayer, A extends ARequestedAction
     // *****************************************************************************************************************
 
     public abstract void initGame(O options, List<User> users);
+    public abstract void startTurn(P player);
+    public abstract void addRequestedActions(P player, List<EAction> actions);
 
     // *****************************************************************************************************************
     // PUBLIC METHODS
