@@ -20,6 +20,7 @@ public class LoveLetterGameManagerDTO extends AGameManagerDTO<LoveLetterPlayerDT
     protected List<LoveLetterCardDTO> discardPile;
     protected List<LoveLetterCardDTO> asideCard;
     protected Integer playerTurn;
+    protected Integer roundNumber;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
