@@ -47,7 +47,7 @@ public abstract class ALoveLetterPlayer<C extends ALoveLetterCard> extends APlay
         sb.append(super.toString());
         sb.append(", position=").append(position);
         sb.append(", ");
-        if (IsOut()) {
+        if (isOut()) {
             sb.append("is out");
         } else {
             sb.append(ToStringUtils.list(hand, "hand"));
@@ -60,11 +60,39 @@ public abstract class ALoveLetterPlayer<C extends ALoveLetterCard> extends APlay
     // PUBLIC METHODS
     // *****************************************************************************************************************
 
+    // HANDS
+
+    /**
+     * Empty the hand
+     */
+    public void clearHand() {
+        hand.clear();
+    }
+
+    /**
+     * Add a card in the hand
+     * @param card the card to deal
+     */
     public void dealCard(C card) {
         hand.add(card);
     }
 
-    public boolean IsOut() {
+    // POINTS
+
+    /**
+     * The player gain a favor peace
+     */
+    public void grantFavorPeace() {
+        nbFavorPeace++;
+    }
+
+    // UTILS
+
+    /**
+     * Is the player out of the game
+     * @return true if the player is out
+     */
+    public boolean isOut() {
         return hand.isEmpty();
     }
 
