@@ -9,6 +9,7 @@ import fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic.AClassicL
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
 import fr.bugo.games.loveletter.shareddata.models.User;
+import fr.bugo.games.loveletter.shareddata.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,34 +37,77 @@ public class ClassicLoveLetterGameManager extends ALoveLetterGameManager<AClassi
 
     @Override
     public void initGame(ClassicLoveLetterGameOptions options, List<User> users) {
+        for (int position = 0; position < users.size(); position++) {
+            User user = users.get(position);
+            ClassicLoveLetterPlayer player = new ClassicLoveLetterPlayer(user, position);
+            players.add(player);
+        }
+        nbTokensToWin = Constants.NB_TOKENS_PER_NB_PLAYERS.get(players.size()); // TODO use options to set this parameter
+        isPlaying = true;
+        roundNumber = 0;
+        this.startRound();
+    }
+
+    // ROUNDS
+
+    @Override
+    public void startRound() {
+        roundNumber++;
         cardPile = ClassicLoveLetterCardFactory.buildInitialGameStack();
         cardPile.shuffle();
         try {
-            asideCard.add(cardPile.drawCard());
-            // Remove 3 more cards facing up when there are two users
-            for (int i = 0; i < 3 && users.size() == 2; i++) {
-                AClassicLoveLetterCard card = cardPile.drawCard();
-                card.setFacingDown(false);
-                asideCard.add(card);
-            }
-            for (int position = 0; position < users.size(); position++) {
-                User user = users.get(position);
-                ClassicLoveLetterPlayer player = new ClassicLoveLetterPlayer(user, position);
-                this.players.add(player);
-                this.playerDrawCard(player);
-            }
-            playerTurn = 0;
-            this.startTurn(this.players.get(playerTurn));
+            this.clearAndDrawCardsAside();
+            this.clearHandsAndDealCardsToPlayers();
+            this.startTurn();
         } catch (EmptyCardStackException e) {
             LOGGER.error("Impossible to start the game, an error has occurred during the card dealing, it is empty");
+            e.printStackTrace();
         }
     }
 
     @Override
-    public void startTurn(ClassicLoveLetterPlayer player) {
-        List<EAction> actions = GameRequestedActionsFactory.fetchDefaultClassicLoveLetterActions();
-        this.addRequestedActions(player, actions);
+    protected void endRound() {
+        // Compute each player's winning tokens
+        List<ClassicLoveLetterPlayer> winningPlayers = getPlayersWithHighestValue();
+        // TODO grant favor peace to player who played the spy
+        for (ClassicLoveLetterPlayer winningPlayer : winningPlayers) {
+            winningPlayer.grantFavorPeace();
+        }
     }
+
+    // TURNS
+
+    @Override
+    public void startTurn() {
+        ClassicLoveLetterPlayer playerTurn = changePlayerTurn();
+        List<EAction> actions = GameRequestedActionsFactory.fetchDefaultClassicLoveLetterActions();
+        this.addRequestedActions(playerTurn, actions);
+    }
+
+    @Override
+    protected void endTurn() {
+        if (cardPile.isEmpty() || onlyOnePlayerRemain()) {
+            this.endRound();
+        } else {
+            this.startTurn();
+        }
+    }
+
+    // CARD PILES
+
+    @Override
+    protected void clearAndDrawCardsAside() throws EmptyCardStackException {
+        asideCard.clear();
+        asideCard.add(cardPile.drawCard());
+        // Remove 3 more cards facing up when there are two users
+        for (int i = 0; i < 3 && players.size() == 2; i++) {
+            AClassicLoveLetterCard card = cardPile.drawCard();
+            card.setFacingDown(false);
+            asideCard.add(card);
+        }
+    }
+
+    // ACTIONS
 
     @Override
     public void addRequestedActions(ClassicLoveLetterPlayer player, List<EAction> actions) {
@@ -71,6 +115,8 @@ public class ClassicLoveLetterGameManager extends ALoveLetterGameManager<AClassi
             this.requestedActions.add(new ClassicLoveLetterRequestedAction(player, action));
         }
     }
+
+    // UTILS
 
     @Override
     public String toString() {

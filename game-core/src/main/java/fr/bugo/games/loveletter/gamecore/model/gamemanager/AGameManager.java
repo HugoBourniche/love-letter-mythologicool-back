@@ -23,6 +23,7 @@ public abstract class AGameManager<P extends APlayer, A extends ARequestedAction
     protected String accessKey;
     protected List<P> players;
     protected List<A> requestedActions;
+    protected boolean isPlaying;
 
     // *****************************************************************************************************************
     // CONSTRUCTOR
@@ -38,20 +39,7 @@ public abstract class AGameManager<P extends APlayer, A extends ARequestedAction
     // *****************************************************************************************************************
 
     public abstract void initGame(O options, List<User> users);
-    public abstract void startTurn(P player);
     public abstract void addRequestedActions(P player, List<EAction> actions);
-
-    // *****************************************************************************************************************
-    // PUBLIC METHODS
-    // *****************************************************************************************************************
-
-    public P getPlayer(String name) throws NoUserException {
-        Optional<P> optPlayer = this.players.stream().filter(p -> p.getUser().getName().equals(name)).findAny();
-        if (optPlayer.isEmpty()) {
-            throw new NoUserException(name);
-        }
-        return optPlayer.get();
-    }
 
     // *****************************************************************************************************************
     // OVERRIDE METHODS
@@ -64,5 +52,17 @@ public abstract class AGameManager<P extends APlayer, A extends ARequestedAction
         sb.append(ToStringUtils.list(requestedActions, "requestedActions"));
         sb.append('}');
         return sb.toString();
+    }
+
+    // *****************************************************************************************************************
+    // PUBLIC METHODS
+    // *****************************************************************************************************************
+
+    public P getPlayer(String name) throws NoUserException {
+        Optional<P> optPlayer = this.players.stream().filter(p -> p.getUser().getName().equals(name)).findAny();
+        if (optPlayer.isEmpty()) {
+            throw new NoUserException(name);
+        }
+        return optPlayer.get();
     }
 }

@@ -19,7 +19,7 @@ public class CardStack<C extends ACard> {
     protected Stack<C> stack;
 
     // *****************************************************************************************************************
-    // METHODS
+    // CONSTRUCTOR
     // *****************************************************************************************************************
 
     public CardStack() {
@@ -27,27 +27,53 @@ public class CardStack<C extends ACard> {
     }
 
     // *****************************************************************************************************************
-    // METHODS
+    // PUBLIC METHODS
     // *****************************************************************************************************************
 
+    /**
+     * Add a card to the stack
+     * @param card Card to add
+     */
     public void addCard(C card) {
         stack.add(card);
     }
 
-    public int size() {
-        return stack.size();
-    }
-
+    /**
+     * Shuffle the card stack
+     */
     public void shuffle() {
         Collections.shuffle(stack);
     }
 
+    /**
+     * Pick up a card in the stack and remove it
+     * @return Card picked up
+     * @throws EmptyCardStackException The stack is empty, can't fetch a card
+     */
     public C drawCard() throws EmptyCardStackException {
         try {
             return stack.pop();
         } catch (EmptyStackException e) {
             throw new EmptyCardStackException("Impossible to draw from an empty stack of cards");
         }
+    }
+
+    // UTILS
+
+    /**
+     * Fetch the size of the stack
+     * @return number of cards
+     */
+    public int size() {
+        return stack.size();
+    }
+
+    /**
+     * Is the stack empty
+     * @return True if the stack is empty
+     */
+    public boolean isEmpty() {
+        return stack.isEmpty();
     }
 
     // *****************************************************************************************************************
