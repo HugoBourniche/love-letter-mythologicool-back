@@ -2,11 +2,15 @@ package fr.bugo.games.loveletter.api.controller;
 
 import fr.bugo.games.loveletter.api.pojo.request.LoveLetterGameInitializationRequest;
 import fr.bugo.games.loveletter.api.pojo.request.LoveLetterGameStatusRequest;
+import fr.bugo.games.loveletter.api.pojo.response.ClassicLoveLetterDrawCardResponse;
 import fr.bugo.games.loveletter.api.services.ClassicLoveLetterGameManagerService;
 import fr.bugo.games.loveletter.api.services.LobbyService;
+import fr.bugo.games.loveletter.dto.gamecore.LoveLetterCardDTO;
 import fr.bugo.games.loveletter.dto.gamecore.convertors.GCModelToDTOConverter;
 import fr.bugo.games.loveletter.api.pojo.response.ClassicLoveLetterGameStatusResponse;
 import fr.bugo.games.loveletter.dto.gamecore.gamemanager.LoveLetterGameManagerDTO;
+import fr.bugo.games.loveletter.gamecore.exceptions.EmptyCardStackException;
+import fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic.AClassicLoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.ClassicLoveLetterGameManager;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import fr.bugo.games.loveletter.gamecore.model.player.ClassicLoveLetterPlayer;
@@ -30,6 +34,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -75,6 +80,18 @@ public class ClassicLoveLetterGameController {
         ClassicLoveLetterPlayer currentPlayer = gameManager.getPlayer(request.getPlayerName());
         LoveLetterGameManagerDTO currentPlayerGameManagerDTO = GCModelToDTOConverter.convert(gameManager, currentPlayer, false);
         return new ResponseEntity<>(new ClassicLoveLetterGameStatusResponse(currentPlayerGameManagerDTO), HttpStatus.OK);
+    }
+
+    // *****************************************************************************************************************
+    // ACTIONS
+    // *****************************************************************************************************************
+
+    @GetMapping("/draw-card")
+    public ResponseEntity<ClassicLoveLetterDrawCardResponse> drawCard(@RequestParam String lobbyKey, @RequestParam String playerName) throws NoLobbyException, NoUserException, EmptyCardStackException {
+        LOGGER.info("/loveletter/classic/draw-card/" + lobbyKey + "/" + playerName);
+        AClassicLoveLetterCard card = gameManagerService.drawCard(lobbyKey, playerName);
+        LoveLetterCardDTO cardDTO = GCModelToDTOConverter.convert(card, true);
+        return new ResponseEntity<>(new ClassicLoveLetterDrawCardResponse(cardDTO), HttpStatus.OK);
     }
 
     // *****************************************************************************************************************

@@ -69,6 +69,23 @@ public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extend
         return sb.toString();
     }
 
+
+    // *****************************************************************************************************************
+    // PUBLIC METHODS
+    // *****************************************************************************************************************
+
+    /**
+     * Draw a card from the card pile stack and give it to the player
+     * @param playerName Name of the player to deal a card
+     * @return Card object
+     * @throws EmptyCardStackException The manager tried to deal cards but there are missing cards to play
+     * @throws NoUserException The given name does not exists in this game
+     */
+    public C dealCardToPlayer(String playerName) throws EmptyCardStackException, NoUserException {
+        P player = this.getPlayer(playerName);
+        return dealCardToPlayer(player);
+    }
+
     // *****************************************************************************************************************
     // PRIVATE METHODS
     // *****************************************************************************************************************
@@ -79,7 +96,7 @@ public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extend
      * Get the Player turn object
      * @return P Player object
      */
-    public P getPlayerTurn() {
+    protected P getPlayerTurn() {
         return this.players.get(playerTurnIndex);
     }
 
@@ -125,18 +142,6 @@ public abstract class ALoveLetterGameManager<C extends ALoveLetterCard, P extend
         C card = cardPile.drawCard();
         player.dealCard(card);
         return card;
-    }
-
-    /**
-     * Draw a card from the card pile stack and give it to the player
-     * @param playerName Name of the player to deal a card
-     * @return Card object
-     * @throws EmptyCardStackException The manager tried to deal cards but there are missing cards to play
-     * @throws NoUserException The given name does not exists in this game
-     */
-    protected C dealCardToPlayer(String playerName) throws EmptyCardStackException, NoUserException {
-        P player = this.getPlayer(playerName);
-        return dealCardToPlayer(player);
     }
 
     /**

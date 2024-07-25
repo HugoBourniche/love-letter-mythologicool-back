@@ -1,8 +1,11 @@
 package fr.bugo.games.loveletter.api.services;
 
+import fr.bugo.games.loveletter.gamecore.exceptions.EmptyCardStackException;
+import fr.bugo.games.loveletter.gamecore.model.card.loveletter.classic.AClassicLoveLetterCard;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.ClassicLoveLetterGameManager;
 import fr.bugo.games.loveletter.gamecore.model.gamemanager.gameoptions.ClassicLoveLetterGameOptions;
 import fr.bugo.games.loveletter.lobbycore.exceptions.NoLobbyException;
+import fr.bugo.games.loveletter.shareddata.exceptions.NoUserException;
 import fr.bugo.games.loveletter.shareddata.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +34,11 @@ public class ClassicLoveLetterGameManagerService {
         gameManager.setAccessKey(lobbyKey);
         gameManager.initGame(gameOptions, players);
         gameManagersMap.put(lobbyKey, gameManager);
+    }
+
+    public AClassicLoveLetterCard drawCard(String lobbyKey, String playerName) throws NoLobbyException, NoUserException, EmptyCardStackException {
+        ClassicLoveLetterGameManager manager = getGameManager(lobbyKey);
+        return manager.dealCardToPlayer(playerName);
     }
 
     // GETTERS
